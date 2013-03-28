@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>knockoutjs</title>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/knockout.js"></script>
+</head>
+<body>
+    <ul class="ad"></ul>
+    <script type="text/javascript">
+        (function($){
+            var o = $({});
+            $.each({
+                trigger:'publish',
+                on:'subscribe',
+                off:'unsubscribe'
+            },function(key,val){
+                $[val] = function(){
+                    o[key].apply(o,arguments);
+                };
+            });
+        })(jQuery);
+
+        //console.log($.subscribe)
+
+        $.getJSON('http://search.twitter.com/search.json?q=messi&callback=?',function(results) {
+            $.publish('twitter/results',results);
+            //$('body').trigger('twitter/results',results);
+        });
+        $.subscribe('twitter/results',function(e,results){
+            console.log(results)
+            $('.ad').html(
+                $.map(results.results,function(obj,index){
+                    return '<li><img src="'+obj.profile_image_url_https+'" />'+obj.text+'</li>';
+                }).join('')
+            );
+        });
+        //$('body').on('twitter/results',function(results){
+         //   console.log(results)
+        //})
+    </script>
+</body>
+</html>
