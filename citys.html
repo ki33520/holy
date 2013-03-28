@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>citys</title>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+        <style type="text/css">
+            *{ margin: 0; padding: 0;}
+        </style>
+	</head>
+<body>
+<h4>citys</h4>
+<select id="city" name="city"></select>
+<select id="cityregion" name="cityregion"></select>
+
+<script type="text/javascript">
+var cityregion_json;
+var loadCityregion = function(obj,wrap){
+    wrap.html('');
+    for(var i in obj){
+        var cityregion = $('<option></option>');
+        cityregion.text(i);
+        cityregion.appendTo(wrap);
+    }
+}
+var loadCityregionAjax = function(wrap){
+    $.ajax({
+        url:'/holy/cityregion.json',
+        type:'GET',
+        cache:false,
+        success: function(data){
+            cityregion_json = data;
+            var n = $(wrap).find('option:selected').text();
+            loadCityregion(data[n],$('#cityregion'));
+        }
+    });
+}
+var loadCity = function(obj,wrap){
+    for(var i=0; i<obj.length;i++){
+        var option = $('<option></option>');
+        option.text(obj[i]).attr('sid',i);
+        option.appendTo(wrap);
+    }
+    loadCityregionAjax(wrap)
+    wrap.bind('change',function(){
+        var n = $(wrap).find('option:selected').text();
+        if(cityregion_json){
+            loadCityregion(cityregion_json[n],$('#cityregion'));
+        }else{
+            loadCityregionAjax(wrap)
+        }
+    })
+}
+$.ajax({
+    url:'/holy/city.json',
+    type:'GET',
+    cache:false,
+    success: function(data){
+        loadCity(data,$('#city'));
+    }
+});
+</script>
+</body>
+</html>

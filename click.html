@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>knockoutjs</title>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/knockout.js"></script>
+        
+	</head>
+<body>
+<p>Login name: <input data-bind="value: userName" /></p>
+<p>Password: <input type="password" data-bind="value: userPassword" /></p>
+ 
+<script type="text/javascript">
+    var viewModel = {
+        userName: ko.observable("abc"),// Initially blank
+        userPassword: ko.observable("abc"), // Prepopulate
+    };
+    ko.applyBindings(viewModel);
+</script>
+</body>
+</html>

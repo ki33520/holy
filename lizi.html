@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>knockoutjs</title>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/knockout.js"></script>
+    <style type="text/css">
+        .list{ display: none;}
+    </style>
+</head>
+<body>
+    <ul class="list" id="list1" style="display:block">
+        <li>
+            <input name="list1" val="1" type="radio" />1
+        </li>
+        <li>
+            <input name="list1" val="2" type="radio" />2
+        </li>
+        <li>
+            <input name="list1" val="3" type="radio" />3
+        </li>
+    </ul>
+    <ul class="list" id="list2">
+        <li>
+            <input name="list2" type="radio" />1
+        </li>
+        <li>
+            <input name="list2" type="radio" />2
+        </li>
+        <li>
+            <input name="list2" type="radio" />3
+        </li>
+    </ul>
+    <ul class="list" id="list3">
+        <li>
+            <input name="list3" type="radio" />1
+        </li>
+        <li>
+            <input name="list3" type="radio" />2
+        </li>
+        <li>
+            <input name="list3" type="radio" />3
+        </li>
+    </ul>
+    <button id="prev">prev</button>
+    <button id="next">next</button>
+    <script type="text/javascript">
+        var Aarr = [];
+        var getA = function(){
+            $('.list').each(function(index,item){
+                $(item).find('input').each(function(ind,itm){
+                    if($(itm).attr('checked')=='checked'){
+                        Aarr.push(ind+1);
+                    }
+                })
+            })
+        }
+        $('#next').click(function(){
+            $('ul.list:visible').hide(0,function(){
+                if($(this).next('ul.list').length){
+                    $(this).next('ul.list').show();
+                }else{
+                    getA();
+                    alert('你的答案：'+Aarr)
+                }
+            });
+        });
+    </script>
+</body>
+</html>

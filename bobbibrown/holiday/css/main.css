@@ -1,0 +1,73 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* reset */
+*{ padding:0; margin:0;}
+ul,li,dl,dt,dd,ol{ list-style:none;}
+img{ border:none; display:block;}
+a{ text-decoration:none; color:#333;}
+body{ font:12px/1.5 tahoma, arial, STHeiTi, sans-serif; color:#333;}
+.left{ float:left; display:inline;}
+.right{ float:right; display:inline;}
+.clearfix:after { content:'\20'; display:block; height:0; clear:both; }
+.clearfix { *zoom:1; }
+.clear{ clear:both;}
+.cur_p{ cursor:pointer;}
+a.cur_for_ie,
+.cur_for_ie a{ background: url(../images/blank.gif); cursor: pointer;}
+
+
+/* inline-block */
+.inline_block{ display:inline-block; *display:inline; *zoom:1;}
+
+/* space */
+.txt_c{ text-align:center;}
+.mg_auto{ margin:auto;}
+.mg_m{ margin:10px;}
+.pd_m{ padding:10px;}
+
+/* layout */
+.hdy_wrap{ width: 950px; margin: 0 auto; position: relative;}
+
+.hdy_center{ position: relative;}
+.hdy_center .btn_cir{ width: 150px; height: 150px; position: absolute; right: 15px; top: 214px;}
+.pop_block_bg{ background: url(../images/hdy_pop_bg.jpg) no-repeat left top; height: 380px; width: 458px; padding: 50px 0 0 350px; z-index: 1000; position: absolute; left: 71px; top: 51px; display: none;}
+.pop_form{ padding-top: 30px;}
+.pop_form .txt_bg{ background: url(../images/hdy_bg_wp1.jpg) no-repeat left top; width: 394px; height: 306px; margin-bottom: 10px; position: relative;}
+.pop_success .img_wrap{ margin-bottom: 10px;}
+.pop_block .btn_submit,
+.pop_block .btn_share{ cursor: pointer;}
+.pop_block .close{ position: absolute; right: -20px; top: 10px; cursor: pointer;}
+.text_input_list li{ position: absolute;}
+.text_input_list li input{ border: 1px solid #ccc; padding: 2px 5px; line-height: 18px; height: 18px; width: 200px; background: #fff;}
+.text_input_list li input.error{ border: 1px solid #f00;}
+.text_input_list li .description{ left: 0; top: 0; position: absolute; height: 24px; line-height: 24px; padding: 0 0 0 5px; color: #999;}
+.text_input_list li.text_input_1{ left: 57px; top: 64px;}
+.text_input_list li.text_input_1 input{ width: 238px;}
+.text_input_list li.text_input_2{ left: 120px; top: 93px;}
+.text_input_list li.text_input_2 input{ width: 173px;}
+.text_input_list li.text_input_3{ left: 92px; top: 214px;}
+.text_input_list li.text_input_3 input{ width: 140px;}
+.text_input_list li.text_input_4{ left: 60px; top: 245px;}
+.text_input_list li.text_input_4 input{ width: 140px;}
+.text_input_list li.text_input_5{ left: 60px; top: 276px;}
+.text_input_list li.text_input_5 input{ width: 140px;}
+.receiver{ position: absolute;  left: 20px; top: 276px;}
+
+.hdy_bottom{ position: relative;}
+.share_link_list li a{ position: absolute; width: 188px; height: 28px;}
+.share_link_1 a{ left: 229px; top: 183px;}
+.share_link_2 a{ left: 407px; top: 234px;}
+.share_link_3 a{ right: 43px; top: 80px;}
+.share_link_4 a{ left: 104px; top: 430px;}
+.share_link_5 a{ right: 78px; top: 498px;}
+.share_link_6 a{ left: 104px; top: 704px;}
+.share_link_7 a{ left: 386px; top: 762px;}
+.share_link_8 a{ right: 94px; top: 775px;}
+.share_link_9 a{ left: 103px; top: 1088px;}
+.share_link_10 a{ left: 386px; top: 1095px;}
+.share_link_11 a{ right: 112px; top: 1097px;}
+.hdy_bottom .qlink1{ position: absolute; width: 118px; height: 111px; left: 34px; top: 811px;}
+.hdy_bottom .qlink2{ position: absolute; width: 333px; height: 22px; left: 464px; top: 1221px;}
+
+.pop_bg{ position: absolute; left: 0; top: 0; width: 950px; height: 100%; background: #000; opacity: 0.6; filter:alpha(opacity=60); z-index: 999; display: none;}
