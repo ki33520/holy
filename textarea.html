@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>KV</title>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <style>
+            body{ font-size: 12px; line-height: 18px; overflow: hidden;}
+            *{ padding: 0; margin: 0;}
+            h1{ padding: 10px 0; margin: 10px 0; line-height: 2em;}
+            ul{ list-style: none; margin: 0;}
+
+
+
+
+            .board_wrapper{ position: relative;}
+
+
+            /*testarea css*/
+            .textarea_border{ border:1px solid #ccc; padding: 5px; width:400px;}
+            .textarea{ position: relative; white-space: pre-wrap; word-wrap: break-word; }
+            .yj-tapf-container {background: #fff; border: 1px solid #ccc; cursor: text; margin: 0 -5px; padding: 6px 4px 4px 4px; width: 100%}
+            .t_div, .t_textarea {background: transparent; font: normal normal 12px/18px Helvetica, Arial, sans-serif; margin: 0; min-height: 36px; overflow: hidden; padding: 0; width: 100%;  position: absolute; left: 0; top: 0}
+            .t_textarea{ border:none; padding: 0; line-height: 18px; margin: 0; width: 100%; overflow: hidden; display: block; position: absolute; background: #fff; resize:none; }
+            .t_div{ line-height: 18px;opacity: 0; color: transparent; filter:alpha(opacity=0);}
+        </style>
+</head>
+<body>
+    <h1>textarea</h1>
+<div class="board_wrapper disabled_all_widgets">
+    
+    <div class="textarea_border">
+        <div class="textarea">
+            <div class="t_div"><span class="sp1"></span></div>
+            <textarea class="t_textarea" id="t1"></textarea>
+        </div>
+    </div>
+</div>
+    <script type="text/javascript">
+        var setHeight = function(t_div,textarea){
+            t_div.find('.sp1').html(textarea.val().replace(/\n/g,"<br>")+' ');
+            var t_height = t_div.height()>36 ? t_div.height() : 36;
+            textarea.css('height',t_height);
+            $('.textarea').css('height',t_height);
+        };
+        $('.textarea').each(function(index,item){
+            var self = this;
+            this.t_div = $(item).find('.t_div');
+            this.textarea = $(item).find('textarea');
+            setHeight(self.t_div,self.textarea)
+            this.textarea.keydown(function(){
+                setHeight(self.t_div,self.textarea);
+            });
+            this.textarea.keyup(function(){
+                setHeight(self.t_div,self.textarea);
+            });
+        });
+    </script>
+</body>
+</html>

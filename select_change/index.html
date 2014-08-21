@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>select</title>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+</head>
+<body>
+    <div>
+        <select id="a">
+            
+        </select>
+        <select id="b">
+            
+        </select>
+        <select id="c">
+            
+        </select>
+    </div>
+    <script type="text/javascript">
+        jQuery(function($) {
+            //获得省份
+            var selecter = [$('#a'),$('#b'),$('#c')],
+                data_url = ["/holy/select_change/a.json","/holy/select_change/b.json","/holy/select_change/c.json"],
+                select_ind = 0;
+            var getData = function(_submit,_url,_callback){
+                var ajax = $.ajax({
+                    type: "POST",
+                    url: _url,
+                    data: _submit,
+                    success: function(msg){
+                        setSelecter(msg);
+                    }
+                })
+                ajax.done(function(){
+                    var todo = _callback ? _callback() : false;
+                })
+            }
+            var setSelecter = function(data){
+                for(var i in data){
+                    var option = $('<option></option>');
+                    if(typeof data[i] !== 'object'){
+                        option.text(data[i]);
+                    }else{
+                        for(var o in data[i]){
+                            option.text(option.text()+data[i][o]);
+                        }
+                    }
+                    option.appendTo(selecter[select_ind]);
+                };
+                if(select_ind<selecter.length-1){
+                    select_ind++;
+                    getData({p:0},data_url[select_ind]);
+                }
+            };
+            var select_change = function(){
+                $(selecter).each(function(index,item){
+                    $(this).change(function(){
+                        var o = $(this).find('option:checked').index();
+                        getData({p:o},data_url[index]);
+                    });
+                });
+            }
+            
+            getData({p:0},data_url[select_ind],select_change);
+        });
+    </script>
+</body>
+</html>

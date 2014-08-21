@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>obj</title>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/knockout.js"></script>
+	</head>
+<body>
+ 
+<script type="text/javascript">
+	var myObject = {
+		value : 0,
+		increment : function(inc){
+			this.value += typeof inc === 'number' ? inc : 1;
+		}
+	};
+	myObject.increment();
+	document.writeln(myObject.value)
+
+	myObject.increment(2);
+	document.writeln(myObject.value)
+
+	myObject.increment(3);
+	document.writeln(myObject.value)
+
+	myObject.increment(4);
+	document.writeln(myObject.value)
+
+	myObject.increment(5);
+	document.writeln(myObject.value)
+
+	myObject.increment(6);
+	document.writeln(myObject.value)
+
+	myObject.increment(7);
+	document.writeln(myObject.value)
+
+	myObject.increment(8);
+	document.writeln(myObject.value)
+</script>
+</body>
+</html>

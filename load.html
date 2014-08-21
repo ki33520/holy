@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<title>onbeforeunload测试</title>
+	<script src="js/jquery.min.js" type="text/javascript"></script>
+
+<script>
+$(window).bind('beforeunload',function(e){
+	console.log(e)
+	$('div').addClass('e');
+	return '';
+})
+
+$('*').bind('click',function(e){
+	alert(e)
+})
+
+</script>
+
+</head>
+
+<body >
+<div>1</div>
+<div>2</div>
+<div>3</div>
+</body>
+
+</html>

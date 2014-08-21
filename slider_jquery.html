@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bootstrap 101 Template</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="view_block view_block_douban">
+        
+    </div>
+    <style type="text/css">
+        *{ padding: 0 ; margin: 0;}
+        .cf:after { content: '\20'; display: block; height: 0; clear: both; }
+        .cf { *zoom: 1; }
+        .view_block{ width: 940px; margin: 0 auto;}
+
+        .view_tab{ margin: 0 auto; padding: 0 64px; position: relative;}
+        .view_tab span.arr{ position: absolute; left: 0; top: 0; width: 54px; height: 54px; background-color: orange; font-size: 20px; line-height: 50px; text-align: center; color: #fff; cursor: pointer; margin: 0 5px;}
+        .view_tab span.next{ left: auto; right: 0;}
+        .view_tab span.dead{ background-color: #ccc; display: none;}
+        .view_tab_list_wrap{ overflow: hidden; float: left;}
+        .view_tab_list_wrap ul{ float: left;}
+        .view_tab_list_wrap li{ float: left; width: 54px; height: 54px; padding: 0 5px; list-style: none; overflow: hidden;}
+        .view_tab_list_wrap li img{ width: 50px; height: 50px; border: 2px solid #ccc; cursor: pointer;}
+        .view_tab_list_wrap li.active img{ border: 2px solid #333;}
+    </style>
+    <script type="text/javascript">
+        var imgarr = [
+            {
+                s:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_1.gif',
+                b:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/ld_417_kv_1.jpg'
+            },
+            {
+                s:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_2.gif',
+                b:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/ld_417_kv_2.jpg'
+            },
+            {
+                s:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_3.gif',
+                b:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/ld_417_kv_3.jpg'
+            },
+            {
+                s:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_4.gif',
+                b:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/ld_417_kv_1.jpg'
+            },
+            {
+                s:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_5.gif',
+                b:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/ld_417_kv_2.jpg'
+            },
+            {
+                s:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_2.gif',
+                b:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/ld_417_kv_3.jpg'
+            },
+            {
+                s:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_3.gif',
+                b:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/ld_417_kv_1.jpg'
+            },
+            {
+                s:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_4.gif',
+                b:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/ld_417_kv_2.jpg'
+            },
+            {
+                s:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_5.gif',
+                b:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/ld_417_kv_3.jpg'
+            },
+            {
+                s:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_2.gif',
+                b:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/ld_417_kv_1.jpg'
+            },
+            {
+                s:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_3.gif',
+                b:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/ld_417_kv_2.jpg'
+            },
+            {
+                s:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_4.gif',
+                b:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/ld_417_kv_3.jpg'
+            },
+            {
+                s:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_5.gif',
+                b:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/ld_417_kv_1.jpg'
+            },
+            {
+                s:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_2.gif',
+                b:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/ld_417_kv_2.jpg'
+            },
+            {
+                s:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_3.gif',
+                b:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/ld_417_kv_3.jpg'
+            },
+            {
+                s:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_4.gif',
+                b:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/ld_417_kv_1.jpg'
+            }
+        ];
+        var pager = function(_wrap,_arr,_dz){
+            this.data = _arr;
+            this.dz = _dz ? _dz : 5;
+            this.ind = 0;
+            this.dzInd = 0;
+            this.wrap = _wrap;
+            this.init();
+        };
+        pager.prototype = {
+            move : function(){
+                if(this.dzInd>Math.floor(this.data.length/5)){
+                    this.dzInd--;
+                };
+                if(this.dzInd<0){
+                    this.dzInd++;
+                };
+                if(this.dzInd>=Math.floor(imgarr.length/5)){
+                    this.next.addClass('dead');
+                }else{
+                    this.next.removeClass('dead');
+                }
+                if(this.dzInd<=0){
+                    this.prev.addClass('dead');
+                }else{
+                    this.prev.removeClass('dead');
+                }
+                
+                //this.ind = this.data.length-this.dz<this.dzInd*this.dz ? this.data.length-this.dz : this.dzInd*this.dz;
+                //left = this.data.length-this.dz<this.dzInd*this.dz ? (this.data.length-this.dz)*this.liw : this.dzInd*this.dz*this.liw;
+                this.ind = this.dzInd*this.dz;
+                this.pager_wrap.find('ul').animate({
+                    'marginLeft':-this.ind*this.liw
+                })
+                this.setBimg();
+            },
+            setBimg : function(){
+                this.img_wrap.find('.view_user').text(this.ind);
+                this.pager_wrap.find('li').removeClass('active').eq(this.ind).addClass('active');
+                this.img_wrap.find('.view_img img').attr({'src':this.data[this.ind]['b'],'title':this.data[this.ind]['b']});
+            },
+            addEvent : function(){
+                var sf = this;
+                sf.move();
+                this.prev.bind('click',function(){
+                    sf.dzInd--;
+                    sf.move();
+                });
+                this.next.bind('click',function(){
+                    sf.dzInd++;
+                    sf.move();
+                });
+                this.pager_wrap.find('li').bind('click',function(){
+                    sf.ind = $(this).index();
+                    sf.setBimg();
+                });
+            },
+            setHTML : function(){
+                var arr = this.data;
+                this.img_wrap = $('<div class="view_img_wrap"><div class="view_img_wrap_inner"><div class="view_img"><img src="" /></div><div class="view_source"></div><div class="view_txt"></div><div class="view_user"></div></div></div>');
+                this.pager_wrap = $('<div class="view_tab cf"><div class="view_tab_list_wrap"><ul class="view_tab_list"></ul></div></div>');
+                this.prev = $('<span class="arr prev"><<</span>');
+                this.next = $('<span class="arr next">>></span>');
+                for(var i in arr){
+                    var li = $('<li data-bimg='+arr[i]['b']+'><img src='+arr[i]['s']+' /></li>');
+                    li.appendTo(this.pager_wrap.find('ul'));
+                    // for(var o in arr[i]){};
+                };
+                this.liw = this.pager_wrap.find('ul li').outerWidth();
+                this.pager_wrap.width(this.dz*this.liw);
+                this.pager_wrap.find('.view_tab_list_wrap').width(this.dz*this.liw);
+                this.pager_wrap.find('ul').width(arr.length*this.liw);
+                this.prev.prependTo(this.pager_wrap);
+                this.next.appendTo(this.pager_wrap);
+                this.img_wrap.appendTo(this.wrap);
+                this.pager_wrap.appendTo(this.wrap);
+                this.addEvent();
+            },
+            init : function(){
+                this.setHTML();
+            }
+        };
+        $('.view_block').each(function(index,item){
+            new pager($(item),imgarr);
+        });
+    </script>
+  </body>
+</html>

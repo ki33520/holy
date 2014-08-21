@@ -1,0 +1,153 @@
+<!doctype html>
+
+<!--[if IEMobile 7]><html class="no-js iem7 oldie"><![endif]-->
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+
+<!-- For all browsers -->
+
+<head>
+<meta charset="utf-8">
+
+<title></title>
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=1, user-scalable=yes">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/layout.css">
+
+<!--[if (lt IE 9) & (!IEMobile)]>
+<script src="js/libs/selectivizr-min.js"></script>
+<![endif]-->
+
+<!-- JavaScript -->
+<script src="js/libs/modernizr-2.0.6.min.js"></script>
+
+</head>
+
+<body>
+	<div id="main">
+        <img src="images/starBg.jpg" id="starBg" class="fixed-top" />
+        <div id="starBlock" class="clearfix">
+            <div class="content">
+                <img src="images/starTitle.png" />
+
+                <div id="starNav" class="clearfix">
+                    <a href="week.html"><img src="images/nav02.jpg" /></a>
+                    <a href="star.html"><img src="images/nav01_2.jpg" /></a>
+                </div>
+
+                <div id="starList">
+                    <ul id="starUl">
+
+                        <!-- <li>
+                            <div>
+                                <img src="upload_images/a182a287.jpg" />
+                                <p>hidelife</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="upload_images/a182a287.jpg" />
+                                <p>hidelife</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="upload_images/a182a287.jpg" />
+                                <p>hidelife</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="upload_images/a182a287.jpg" />
+                                <p>hidelife</p>
+                            </div>
+                        </li> -->
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+	</div>
+    <div id="footer" class="clearfix fixed-bottom">
+        <ul>
+            <li><a href="camera.html">参与活动</a></li>
+            <li><a href="star.html">街拍精选</a></li>
+            <li><a href="product.html">清澈净白系列</a></li>
+            <li><a href="submitTest.html">试用申请</a></li>
+        </ul>
+    </div>
+
+    <div id="testttt" class="clearfix fixed-bottom" style="z-index:100; bottom: 100px;"></div>
+
+<!-- Scripts -->
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/script.js"></script>
+<script src="js/mylibs/helper.js"></script>
+
+<script type="text/javascript">
+
+var index = 1;
+var scrolling = 0;
+
+var getList = function(){
+    if(scrolling == 0){
+        scrolling = 1;
+        var submit = {};
+        submit.type = 'all';
+        submit.page = index;
+        $.post("services/data.php", submit, function(msg){
+            var data = msg.data;
+            index++;
+            scrolling = 0;
+            for(var i in data){
+                var html = '<li><div><img src="upload_images/'+data[i].picture+'" /><p>'+data[i].sina_name+'</p></div></li>';
+                $(html).appendTo($("#starUl"))
+            }
+        });
+    }
+}
+
+$(window).bind("scroll",function(){
+    //console.log("fefefe")
+    var t = $(this).scrollTop();
+    var h = $(window).height();
+    var full = $("#main").height();
+    //$("#testttt").html((t+h)+"///"+full)
+    if((t+h) > (full/2-100)){
+        //alert("finish")
+        getList();
+    }
+
+})
+
+getList();
+
+</script>
+
+
+<script>
+// iOS scale bug fix
+MBP.scaleFix();
+
+// Respond.js
+yepnope({
+	test : Modernizr.mq('(only all)'),
+	nope : ['js/libs/respond.min.js']
+});
+</script>
+
+</body>
+</html>

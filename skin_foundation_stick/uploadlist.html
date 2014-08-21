@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="format-detection" content="telephone=no" />
+<meta name="mobileoptimized" content="0">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="apple-touch-fullscreen" content="yes" />
+<title>BOBBI BROWN 芭比波朗</title>
+<meta name="description" content=""/> 
+<meta name="keywords" content=""/>
+<link href="css/base.css" rel="stylesheet" type="text/css">
+<link href="css/common.css" rel="stylesheet" type="text/css">
+<link href="css/index.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+	var phoneWidth =  parseInt(window.screen.width);
+	var phoneScale = phoneWidth/640;
+	var ua = navigator.userAgent;
+	if (/Android (\d+\.\d+)/.test(ua)){
+		var version = parseFloat(RegExp.$1);
+		if(version>2.3){
+			document.write('<meta name="viewport" content="width=640, minimum-scale = '+phoneScale+', maximum-scale = '+phoneScale+', target-densitydpi=device-dpi">');
+		}else{
+			document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+		}
+	} else {
+		document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+	}
+</script>
+</head>
+<body>
+<div class="container opacity">
+	<div class="listbox section">
+    	<div class="listtitle clearfix">
+        	<a href="javascript:;" class="more"></a>
+            <a href="javascript:;" class="join"></a>
+        </div>
+        <div class="listcontent">
+        	<ul class="infinite_scroll">
+
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="footer"></div>
+<div class="blackbg"></div>
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/src/event/events.js" type="text/javascript"></script>
+<script src="js/src/util/Utils.js" type="text/javascript"></script>
+<script src="js/src/browser/browser.js" type="text/javascript"></script>
+<script src="js/jquery.masonry.js" type="text/javascript"></script>
+
+<script>
+
+var fdstick = function(){
+	this.init();
+}
+fdstick.prototype = {
+	init:function(){
+		var _self = this;
+		_self.totalh = 0;
+		_self.page = 0;
+		_self.ajaxCon = true;
+		_self.fitwin();
+		_self.start();
+	},
+	start:function(){
+		$('.container').removeClass('opacity');
+		this.getPage(this.page);
+		this.infinite();
+	},
+	infinite:function(){
+		var _self = this;
+		if($('.item').length > 0){
+			var item_masonry = function (){ 
+			
+				$('.item').find('img').load(function(){ 
+					$('.infinite_scroll').masonry({ 
+						itemSelector: '.masonry_brick',
+						columnWidth:195,
+						gutterWidth:10								
+					});		
+				});
+					
+				$('.infinite_scroll').masonry({ 
+					itemSelector: '.masonry_brick',
+					columnWidth:195,
+					gutterWidth:10								
+				});	
+				
+				$('.infinite_scroll').masonry();
+				
+			}
+			item_masonry();
+		}
+	},
+	scrollTop:function(){
+		console.log(this.totalh);
+		if(this.totalh != 0){
+			if(this.totalh - $(window).scrollTop() - $(window).height() < $(window).height() && this.ajaxCon){
+				this.getPage(this.page);
+			}
+		}
+	},
+	getPage:function(num){
+		var _self = this;
+		
+		var result = {status:1,data:
+			[{picture:'images/waterfall1.jpg'},{picture:'images/waterfall2.jpg'},{picture:'images/waterfall3.jpg'},{picture:'images/waterfall2.jpg'},{picture:'images/waterfall2.jpg'},{picture:'images/waterfall2.jpg'},{picture:'images/waterfall2.jpg'},{picture:'images/waterfall2.jpg'},{picture:'images/waterfall2.jpg'},{picture:'images/waterfall2.jpg'}]
+		}
+		
+		if(result.status == 1 && result.data.length > 0){
+			var list = '';
+			_self.page ++;
+			$.each(result.data,function(){
+				list += '<li class="item masonry_brick"><img src="'+this.picture+'"></li>'	
+			})
+			$('.infinite_scroll').append(list);
+			if(num == 0){
+				_self.infinite();
+			}else{
+				$('.infinite_scroll').masonry('reload');
+			}
+			
+			_self.totalh = $('.container').outerHeight(true);
+		}
+		
+		/*
+		$.ajax({
+			type: 'POST', 
+			data: {page:num},
+			url: '/lamer/skinenergy201406/services/data.php', 
+			dataType: 'json', 
+			cache: false, 
+			async: false,
+			beforeSend: function(){
+				_self.ajaxCon = false;	
+			},
+			error: function(){
+				alert('网络错误');
+				return false;
+			},
+			success:function(result){
+				if(result.status == 1 && result.data.length > 0){
+					var list = '';
+					_self.page ++;
+					$.each(result.data,function(){
+						list += '<li><img src="/lamer/skinenergy201406/upload_images/'+this.picture+'" width="'+_self.imgsize.w+'" height="'+_self.imgsize.h+'"></li>'	
+					})
+					$('.uplist').find('ul').append(list);
+					_self.totalh = Math.ceil($('.uplist').find('li').length / 2) * (_self.imgsize.h + 30) + 25 + 54 + 92 + 42 + 60;
+				}
+			},
+			complete: function(){
+				_self.ajaxCon = true;
+			}
+		});
+		*/
+	},
+	fitwin:function(){
+		var _self = this;
+		_self.w = $(window).width();
+		_self.h = $(window).height();
+		var bgh = _self.h > $('body').height() ? _self.h : $('body').height();
+		$('.blackbg').height(bgh);
+	}
+}
+
+var l;
+
+$(function(){
+	l = new fdstick();
+	$(window).resize(function(){
+		l.fitwin();	
+	})
+	$(window).scroll(function(){
+		l.scrollTop();	
+	})
+})
+
+window.onload = function(){
+	l.fitwin();	
+}
+</script>
+</body>
+</html>

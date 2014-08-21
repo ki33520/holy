@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>KV</title>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+        <style>
+            body{ font-size: 12px; line-height: 18px;}
+            *{ padding: 0; margin-right: 0;}
+            .clearfix:after { content: '\20'; display: block; height: 0; clear: both; }
+            .clearfix { *zoom: 1; }
+            ul{ list-style: none;}
+            .kv{ position: relative; width: 156px; overflow: hidden; margin: 0 auto;}
+            .kv_list li{ float: left; width: 156px;}
+            .kv_list li img{ width: 156px; display: block;}
+            .kv_tab{ position: absolute; right: 0; bottom: 2px;}
+            .kv_tab li{ float: left; width: 18px; color: #999; height: 18px; background: #ccc; line-height: 18px; margin-right: 2px; text-align: center; cursor: pointer;}
+            .kv_tab li.active{ color: #333;}
+        </style>
+	</head>
+<body>
+    <div id="kv" class="kv">
+        <ul id="kv_list" class="kv_list clearfix"></ul>
+        <ul id="kv_tab" class="kv_tab clearfix"></ul>
+    </div>
+<script type="text/javascript">
+    var kv_arr = [
+        {
+            'img':'head_pic_s_01.jpg',
+            'tit':'pic1'
+        },
+        {
+            'img':'head_pic_s_02.jpg',
+            'tit':'pic1'
+        },
+        {
+            'img':'head_pic_s_03.jpg',
+            'tit':'pic1'
+        },
+        {
+            'img':'head_pic_s_04.jpg',
+            'tit':'pic1'
+        },
+        {
+            'img':'head_pic_s_05.jpg',
+            'tit':'pic1'
+        }
+    ];
+    var wrap = $('#kv'),
+        list = $('#kv_list'),
+        tab = $('#kv_tab');
+    var setHTML = function(){
+        for(var i=0; i<kv_arr.length; i++){
+            var li = $('<li><img src="images/'+kv_arr[i]['img']+'" tit="'+kv_arr[i]['img']+'" /></li>'),
+                dot = $('<li>'+(i+1)+'</li>');
+            if(i==0){
+                dot.addClass('active');
+            }
+            li.appendTo(list);
+            dot.appendTo(tab);
+        };
+        list.css('width',list.find('li').width()*kv_arr.length);
+        tab.find('li').each(function(index,item){
+            $(item).click(function(){
+                alert(index)
+            });
+        });
+    };
+    setHTML();
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bootstrap 101 Template</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id="box_wrap">
+        <div class="box_wrap">
+            <ul id="box"></ul>
+        </div>
+    </div>
+    <style type="text/css">
+        *{ padding: 0 ; margin: 0;}
+        #box_wrap{ width: 420px; overflow: hidden; position: relative;}
+        #box_wrap .arr{ position: absolute; left: 0; top: 0; width: 50px; height: 50px; line-height: 50px; background: #f0f1ff; text-align: center; cursor: pointer;}
+        #box_wrap .arr_next{ left: auto; right: 0;}
+        #box_wrap .dead{ background: #ccc;}
+        .box_wrap{ width: 300px; overflow: hidden; margin: 0 auto; height: 50px;}
+        #box{ float: left;}
+        #box li{ float: left; width: 50px; height: 50px; margin-right: 10px; list-style: none; padding: 0; overflow: hidden;}
+        #box li img{ width: 50px; height: 50px;}
+    </style>
+    <script type="text/javascript">
+        var imgarr = [
+            {src:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_1.gif'},
+            {src:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_2.gif'},
+            {src:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_3.gif'},
+            {src:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_4.gif'},
+            {src:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_5.gif'},
+            {src:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_1.gif'},
+            {src:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_2.gif'},
+            {src:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_2.gif'},
+            {src:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_3.gif'},
+            {src:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_4.gif'},
+            {src:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_5.gif'},
+            {src:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_1.gif'},
+            {src:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_2.gif'},
+            {src:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_2.gif'},
+            {src:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_3.gif'},
+            {src:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_4.gif'},
+            {src:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_5.gif'},
+            {src:'http://www.lenscrafters.com.cn/lc_cn/sites/all/themes/lenscrafter_cn/images/pro_nav_icon_1.gif'}
+        ];
+        var html,
+            moveInt = 0,
+            arr_next = document.createElement('a'),
+            arr_prev = document.createElement('a');
+        for(var i in imgarr){
+            var li = document.createElement('li'),
+                img = new Image();
+            img.src = imgarr[i]['src'];
+            li.appendChild(img);
+            document.getElementById('box').appendChild(li);
+        };
+        var move = function(){
+            var box = document.getElementById('box');
+            if(moveInt>Math.floor(imgarr.length/5)){
+                moveInt--;
+            };
+            if(moveInt<0){
+                moveInt++;
+            };
+            if(moveInt>=Math.floor(imgarr.length/5)){
+                arr_next.setAttribute('class','arr_next arr dead');
+            }else{
+                arr_next.setAttribute('class','arr_next arr');
+            };
+            if(moveInt==0){
+                arr_prev.setAttribute('class','arr_prev arr dead');
+            }else{
+                arr_prev.setAttribute('class','arr_prev arr');
+            };
+            left = imgarr.length-5<moveInt*5 ? (imgarr.length-5)*60 : moveInt*5*60;
+            box.style.marginLeft = -left+'px';
+        };
+        var addArr = function(){
+            arr_next.setAttribute('class','arr_next arr');
+            arr_next.innerHTML = 'next';
+            arr_prev.setAttribute('class','arr_prev arr');
+            arr_prev.innerHTML = 'prev';
+            document.getElementById('box_wrap').appendChild(arr_next);
+            document.getElementById('box_wrap').appendChild(arr_prev);
+            move();
+            arr_next.addEventListener("click",function(){
+                moveInt ++;
+                move();
+            },false);
+            arr_prev.addEventListener("click",function(){
+                moveInt --;
+                move();
+            },false);
+        };
+        addArr();
+    </script>
+  </body>
+</html>
+

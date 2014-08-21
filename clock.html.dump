@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Rapha毛l 路 Roundabout</title>
+        <link rel="stylesheet" href="demo.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="demo-print.css" type="text/css" media="print">
+        <style type="text/css">
+        svg circle{ cursor: pointer;}
+        svg path{ background: #f00;}
+        </style>
+        <script src="raphael.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+            window.onload = function () {
+                var r = Raphael("holder", 640, 480),
+                    angle = 90,
+                    start = 90,
+                    cindex = 0
+                    pindex = 0;
+                //console.log(Raphael.getColor);
+                while (angle < 450) {
+                    (function (t, c ,st) {
+                        var ind = cindex;
+                        r.circle(320, 450, 20).attr({stroke: '#fff', fill: c, transform: t, opacity:0.1}).click(function () {
+                            var sc = ind-pindex+12;
+                            if(sc > 12){
+                                sc = sc -12;
+                            }
+
+                            console.log(sc)
+                            start = start+sc*30;
+                            s.animate({transform: "r"+start+" 320 240", stroke: '#a06f57'}, 1000, "bounce");
+                            pindex = ind;
+                        }).mouseover(function () {
+                            this.animate({opacity:0.1}, 500);
+                        }).mouseout(function () {
+                            this.animate({opacity:0.1}, 500);
+                        });
+                    })("r" + angle + " 320 240", '#fff',angle);
+                    cindex ++;
+                    angle += 30;
+                }
+                //Raphael.getColor.reset();
+                var s = r.set();
+                s.push(r.image('images/arr_z.png','49%', '53%', 12, 140).attr({transform:'r90 320 240'}));
+                //s.push(r.path("M320,240c-0,100,0,110,0,190").attr({stroke: "http://localhost/holy/images/primera_ip.jpg",fill: "http://localhost/holy/images/primera_ip.jpg", "stroke-width": 10}));
+                s.push(r.circle(320, 240, 3).attr({stroke: "#a06f57",fill: "#a06f57", "stroke-width": 2}));
+                //s.attr({stroke: Raphael.getColor()});
+            };
+        </script>
+    </head>
+    <body>
+        <div id="holder"></div>
+    </body>
+</html>

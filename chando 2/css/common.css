@@ -1,0 +1,80 @@
+html,body { background: #fff ; font: 15px/1.5em Helvetica Neue, Helvetica, Arial, Sans-serif;  margin: 0; padding: 0;}
+.cf:after { content: '\20'; display: block; height: 0; clear: both; }
+.cf { *zoom: 1; }
+*{ padding: 0; margin: 0;}
+
+
+/* defalut */
+.full_media_slider{ padding: 0 3%; margin-bottom: 3%; font-family: "Microsoft YaHei","微软雅黑",Arial;}
+
+.default_slider_container { max-width: 1000px; width: 100%; margin: 0 auto; position: relative;}
+
+.default_slider_container .goToBlock { width:100%; margin: 0 auto; text-align: center; position: absolute; left: 0; bottom: 3%; z-index: 2;}
+
+.default_slider_container .goToBlock .go { background-image: url(../images/dot.png); background-repeat: no-repeat; background-position: 0 0; width: 10px; line-height: 10px; overflow: hidden; height: 10px; margin: 0 10px 0 0; cursor: pointer; display: inline-block;}
+.default_slider_container .goToBlock .active{ background-position: 0 bottom;}
+
+.kv_full_media_slider .goToBlock{}
+
+
+.default_slider { position: relative; overflow: hidden; height: 500px; margin: 0 auto; width: 100%;}
+
+.default_slider .slider { width: 100%; height: 100%; position: relative;}
+
+.default_slider .slider .item { float: left; width: 100%; height: 100%; position: relative; overflow: hidden;}
+.default_slider .slider .item img{ float: left; /*min-width: 480px;*/}
+.default_slider .slider .left_txt img{ float: right;}
+.default_slider .slider .item .txt{ position: absolute; display: none; left: 55%; top: 15%; max-width: 500px; width: 46%; font-size: 1.2em;}
+.default_slider .slider .left_txt .txt{ left: 8%;}
+.default_slider .slider .item h2{ font-size: 1.8em; line-height: 1.5em; margin-bottom: 3%;}
+.default_slider .slider .item .txt p{ font-size: 1.1em; color: #666; line-height: 1.5em; margin-bottom: 3%;}
+.default_slider .slider .item .txt .link a{ font-size: 1.2em; color: #333;}
+
+/*.w1 .default_slider{ height: 500px;}
+.w2 .default_slider{ height: 400px;}
+.w3 .default_slider{ height: 320px;}
+.w4 .default_slider{ height: 240px;}
+.w5 .default_slider{ height: 180px;}*/
+
+
+/*.w1 .default_slider .slider .item img{ height: 500px;}
+.w2 .default_slider .slider .item img{ height: 400px;}
+.w3 .default_slider .slider .item img{ height: 320px;}
+.w4 .default_slider .slider .item img{ height: 240px;}
+.w5 .default_slider .slider .item img{ height: 180px;}*/
+
+
+.w1 .default_slider .slider .item .txt{ font-size: 0.9em;}
+.w2 .default_slider .slider .item .txt{ font-size: 0.8em;}
+.w3 .default_slider .slider .item .txt{ font-size: 0.7em;}
+.w4 .default_slider .slider .item .txt{ position: static; clear: both; font-size: 0.6em; padding: 1% 3% 0 3%; width: 94%; text-align: right;}
+
+
+.w4 .default_slider .slider .item h2{ font-size: 1.5em; margin-bottom: 0; float: left; width: 70%; text-align: left;}
+.w4 .default_slider .slider .item .txt .link{ }
+.w4 .default_slider .slider .item .txt p{ float: left; width: 70%; text-align: left; margin-bottom: 0;}
+.w4 .default_slider .slider .item .txt h2 br{ display: none;}
+
+/*.w4 .default_slider_container .goToBlock{ width: 125px; margin: 1% auto; display: block;}
+.w4 .default_slider_container .goToBlock .go{ width: 15px; height: 15px; margin-right: 10px; border-radius: 20px;}*/
+
+.arrBlock{ display: none;}
+.arrBlock .next,
+.arrBlock .prev { width: 40px; height: 40px; padding: 10px; line-height: 30px; font-size: 1.5em; font-family: arial; text-align: center; position: absolute; top: 50%; margin-top: -15px; z-index: 2;}
+.arrBlock .prev{ left: 1%;}
+.arrBlock .next{ right: 1%;}
+.arrBlock .next a,
+.arrBlock .prev a{ background-image: url(../images/arr_prev.png); background-size: cover; background-position: 0 0; color: #fff; width: 100%; display: block; height: 100%; border-radius: 50%;}
+.arrBlock .next a{ background-image: url(../images/arr_next.png);}
+.arrBlock .disable a{ background-position: -80px 0;}
+.arrBlock .next a:hover,
+.arrBlock .prev a:hover{ background-position: -40px 0; color: #fff;}
+.arrBlock .disable a:hover{ background-position: -80px 0;}
+.w4 .default_slider_container .arrBlock .prev,
+.w4 .default_slider_container .arrBlock .next{ margin-top: -60px;}
+.default_slider_container .arrBlock.active{ display: block;}
+.w4 .default_slider_container .arrBlock.active{ display: none;}
+
+.logo_bar{ border-bottom: 1px solid #ccc; margin: 0 3% 3% 3%;}
+.logo_bar .logo{ max-height: 55px; padding: 20px 0 20px; width: auto; margin: 0 auto; display: block;}
+

@@ -1,0 +1,97 @@
+html{background: none; padding: 0px; margin: 0px; width:100%; height: 100%; zoom:0.5;}
+body{width:100%; padding: 0px; margin: 0px; background-color: #fff; font-size: 12px;height: 100%; position: relative;}
+body#shake{overflow: hidden;}
+
+ul,li{padding: 0px; margin: 0px; list-style: none;}
+
+img{width: 100%; display: block;}
+
+.relative{position: relative;}
+.absolute{position: absolute;}
+
+.text-center{text-align: center;}
+.text-right{text-align: right;}
+.text-left{text-align: left;}
+
+.clearfix:after { content: '\20'; display: block; height: 0; clear: both; }
+.clearfix { *zoom: 1; }
+.clear{clear:both;}
+
+.fixed-top{position:fixed;bottom:auto;top:0px;}
+.fixed-bottom{position:fixed;bottom:0px;top:auto;}
+.fixed-left{position:fixed;right:auto;left:0px;}
+.fixed-right{position:fixed;right:0px;left:auto;}
+* html,* html body{background-image:url(about:blank);background-attachment:fixed;}
+* html .fixed-top{position:absolute;bottom:auto;top:expression(eval(document.documentElement.scrollTop));}
+* html .fixed-right{position:absolute;right:auto;left:expression(eval(document.documentElement.scrollLeft+document.documentElement.clientWidth-this.offsetWidth)-(parseInt(this.currentStyle.marginLeft,10)||0)-(parseInt(this.currentStyle.marginRight,10)||0));}
+* html .fixed-bottom{position:absolute;bottom:auto;top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));}
+* html .fixed-left{position:absolute;right:auto;left:expression(eval(document.documentElement.scrollLeft));}
+
+#footer{background-color: #a3c4d8;bottom: 0px; left: 0px; z-index: 2; width: 100%;}
+#footer li{width: 25%; text-align: center; padding: 1em 0; float: left;}
+#footer li a{line-height: 1.2em; height: 1.2em; display: block; border-right: 1px solid #fff; font-size: 0.7em; color: #ffffff; text-decoration: none;}
+
+#main{width: 100%;}
+
+#beginCamera{position: relative;}
+
+#showCanvas{width: 583px; background: #fff; border-radius: 10px; margin: 0 auto; padding-top: 10px; box-shadow: 0px 0px 5px #666666;}
+#canvas{width: 583px; background: #000; margin: 0px auto; height: 502px; margin-bottom: 0px; position: relative;}
+#canvas #leftButton{position: absolute; width: 52px; height: 66px; top: 238px; left: -20px;}
+#canvas #rightButton{position: absolute; width: 52px; height: 66px; top: 238px; right: -20px;}
+
+#fileBlock{width: 100%; height: 111px; margin: 0px auto; position: absolute; left: 0px; top: 0px;}
+
+.btn_addPic{display: block; position: relative; width: 111px; height: 111px; overflow: hidden; background: url(../images/camera_04.jpg); repeat scroll 0 0 #F3F3F3; background-size: cover; color: #999999; cursor: pointer; text-align: center; margin: 0px auto;}  
+.btn_addPic span{display: block;line-height: 39px;} 
+.filePrew {display: block; position: absolute; top: 0; left: 0; width: 140px; height: 39px; font-size: 100px; opacity: 0; filter:alpha(opacity=0);}  
+
+#camera01{display: block;}
+#camera02{display: none;}
+#camera02.show{background: url(../images/bg.jpg) no-repeat; background-size: cover; display: block; padding: 5% 0; position: relative; overflow: hidden;}
+#tmplList{padding: 5% 3% 15%;}
+#tmplList span.left{width: 105px; float: left;}
+
+#tmplList .circle{width: 70px; height: 70px; margin-left: 15px; font-size: 4em; line-height: 70px; text-align: center; display: block; float: left; background: #ffffff; color: #55abd4; -moz-border-radius: 50px; -webkit-border-radius: 50px; border-radius: 50px; box-shadow: 0px 0px 3px #999;}
+#tmplList .active{color: #ffffff; background: #55abd4;}
+
+#submitButton{width: 292px; margin: 5% auto; display: block;}
+
+.stepContent{width: 583px; margin: 0 auto;}
+#step3{width: 100%; background: #fff; border-radius: 10px; padding-top: 10px; box-shadow: 0px 0px 5px #666666; margin-bottom: 5%;}
+#shareButton{display: block; width: 292px; height: 88px;}
+#step3Img{position: absolute; right: -100px; bottom: -80px; width: 340px; height: 338px;}
+
+.content{width:640px; margin: 0px auto; display: block;}
+#formBlock{background: url(../images/form_bg.jpg) no-repeat; background-size: cover; padding: 10px 0px;}
+#formBlock h2{font-size: 1.4em; line-height: 1.2em; text-align: center;}
+#formBlock h3{font-size: 1.2em; line-height: 1.2em; text-align: center;}
+
+#formBlock form{width: 70%; margin:0px auto;}
+#formBlock form input {text-align: center; width: 98%; padding: 15px 5px;}
+#formButton{display: block; width: 289px; margin: 0px auto;}
+
+#starBg{top: 0px; left: 0px;}
+#starBlock{position: relative; z-index: 2;}
+#starBlock #starNav{width: 588px; margin: 0px auto;}
+#starBlock #starNav a{float: left; margin-right: 10px; width: 224px; display: block;}
+#starBlock #starList{width: 568px; margin: 0px auto; background: #fff; padding: 10px 10px 100px; box-shadow:  0px 0px 5px #cccccc;}
+#starBlock #starList li{width: 46%; padding: 0px 2%; display: inline-block; margin: 2% 0;}
+#starBlock #starList li div{border-radius: 10px; padding: 10px; box-shadow:  0px 0px 5px #cccccc;}
+#starBlock #starList li p{margin: 0px; padding: 5px 0px; text-align: center; color: #56abd5; font-size: 0.9em;}
+
+#weekBlock{width: 568px; margin: 0px auto; background: #fff; padding: 20px 10px 120px; box-shadow:  0px 0px 5px #cccccc; position: relative;}
+#weekBlock h2{font-size: 2em; padding: 1%; text-align: center; color: #56abd5; position: relative;}
+#imageBlock{width: 435px; margin: 10px auto; padding: 10px; border-radius: 10px;  box-shadow:  0px 0px 5px #cccccc;}
+#imageBlock #photoImg {width: 435px; height: 375px;}
+#imageBlock p{margin: 10px 0px; text-align: center; color: #56abd5; font-size: 1.2em;}
+
+#imageBlock a{width: 37px; display: block; position: absolute;}
+#imageBlock a.left{left:10px;  top: 40%;}
+#imageBlock a.right{right: 10px; top: 40%;}
+
+
+
+
+
+

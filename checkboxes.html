@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>checkbox&radio</title>
+        <style>
+           .clear{ clear: both; line-height: 0; font-size: 0;}
+            .bb{ border-bottom: 1px solid #ccc;}
+            .b1{ boder:1px solid #ccc; float: left; display: inline; width: 200px; height: 100px; margin: 10px; border:1px solid #f1f1f1;}
+        </style>
+        <script src="js/jquery.min.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div class="bb clearfix">
+            <div class="b1">1</div>
+            <div class="b1">2</div>
+            <div class="clear"></div>
+        </div>
+    <div class="q_item">
+        <h2>有做过检查？</h2>
+        <ul>
+            <li>
+                <input class="sl" type="radio" name="r1" />
+                <label>是</label>
+                <div class="flw">
+                    <div class="dis">描述……</div>
+                    <input type="text" />
+                </div>
+            </li>
+            <li>
+                <input class="sl" type="radio" name="r1" />
+                <label>否</label>
+                <div class="flw">
+                    <div class="dis">描述……</div>
+                    <input type="text" />
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="q_item">
+        <h2>避孕措施？</h2>
+        <ul>
+            <li>
+                <input class="sl" type="checkbox" name="r2" />
+                <label>避孕药物</label>
+                <div class="flw">
+                    <div class="dis">描述……</div>
+                    <input type="text" />
+                </div>
+            </li>
+            <li>
+                <input class="sl" type="checkbox" name="r2" />
+                <label>避孕套</label>
+                <div class="flw">
+                    <div class="dis">描述……</div>
+                    <input type="text" />
+                </div>
+            </li>
+            <li>
+                <input class="sl" type="checkbox" name="r2" />
+                <label>节育器</label>
+                <div class="flw">
+                    <div class="dis">描述……</div>
+                    <input type="text" />
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        var changeSl = function(b,itm){
+            if($(b).is(':checked')){
+                if($(b).is(':radio')){
+                    $(itm).siblings().find('.flw').hide();
+                };
+                $(itm).find('.flw').show();
+            }else{
+                $(itm).find('.flw').hide();
+            };
+        }
+        $('.q_item').each(function(index,item){
+            $(item).find('li').each(function(ind,itm){
+                $(itm).find('input.sl').each(function(a,b){
+                    changeSl(b,itm);
+                    $(b).change(function(){
+                        changeSl(b,itm);
+                    });
+                });
+            });
+        });
+    </script>
+    </body>
+</html>

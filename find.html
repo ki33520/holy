@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>find</title>
+        <script src="js/jquery.min.js" type="text/javascript"></script>
+        <style type="text/css">
+        body{ background: #ccc;}
+        .left{ float:left; display:inline;}
+        .right{ float:right; display:inline;}
+        .cf:after { content: '\20'; display: block; height: 0; clear: both; }
+        .cf { *zoom: 1; }
+        .clear{clear:both;}
+        .txtC{ text-align: center;}
+
+        .find_item{ width: 810px; display: none;}
+        .find_item .img_wrap{ cursor: pointer;}
+        .find_item .result .r1,
+        .find_item .result .r2{ display: none;}
+        .ss_wrap{ display: none;}
+        map{ background: #ccc;}
+        </style>
+    </head>
+    <body>
+        <div>
+        <div class="find_item">
+            <div class="item_wrap">1
+                <div class="left">
+                    <div class="img_wrap"><img src="images/ad.jpg" usemap="#Map1_1" /></div>
+                    <map name="Map1_1">
+                        <area class="r" shape="circle" coords="129,161,100">
+                    </map>
+                </div>
+                <div class="right">
+                    <div class="img_wrap"><img src="images/ad.jpg" usemap="#Map1_2" /></div>
+                    <map name="Map1_2">
+                        <area class="r" shape="circle" coords="129,161,100">
+                    </map>
+                </div>
+            </div>
+            <div class="result">
+                <div class="r1">w</div>
+                <div class="r2">r</div>
+            </div>
+        </div>
+        <div class="find_item">
+            <div class="item_wrap">2
+                <div class="left">
+                    <div class="img_wrap"><img src="images/ad.jpg" usemap="#Map2_1" /></div>
+                    <map name="Map2_1">
+                        <area class="r" shape="circle" coords="129,161,100">
+                    </map>
+                </div>
+                <div class="right">
+                    <div class="img_wrap"><img src="images/ad.jpg" usemap="#Map2_2" /></div>
+                    <map name="Map2_2">
+                        <area class="r" shape="circle" coords="129,161,100">
+                    </map>
+                </div>
+            </div>
+            <div class="result">
+                <div class="r1">w</div>
+                <div class="r2">r</div>
+            </div>
+        </div>
+        <div class="find_item">
+            <div class="item_wrap">3
+                <div class="left">
+                    <div class="img_wrap"><img src="images/ad.jpg" usemap="#Map3_1" /></div>
+                    <map name="Map3_1">
+                        <area class="r" shape="circle" coords="129,161,100">
+                    </map>
+                </div>
+                <div class="right">
+                    <div class="img_wrap"><img src="images/ad.jpg" usemap="#Map3_2" /></div>
+                    <map name="Map3_2">
+                        <area class="r" shape="circle" coords="129,161,100">
+                    </map>
+                </div>
+            </div>
+            <div class="result">
+                <div class="r1">w</div>
+                <div class="r2">r</div>
+            </div>
+        </div>
+        <div class="ss_wrap">ss</div>
+        <script type="text/javascript">
+        var a_ind = 0;
+        $('.find_item').each(function(index,item){
+            if(index == 0){
+                $(item).show();
+            };
+            $(this).find('.img_wrap').each(function(ind,itm){
+                $(itm).click(function(e){
+                    $(item).find('.item_wrap').hide();
+                    $(item).find('.r1').show();
+                });
+            });
+            $(this).find('.r').each(function(ind,itm){
+                $(itm).click(function(e){
+                    $(item).find('.item_wrap').hide();
+                    a_ind++;
+                    $(item).find('.r2').show();
+                });
+            });
+            
+            $(item).find('.r2,.r1').click(function(){
+                console.log(a_ind)
+                $(item).find('.item_wrap').show();
+                if(a_ind >= $('.find_item').length){
+                    $('.find_item').hide();
+                    $('.ss_wrap').show();
+                }else{
+                    $('.find_item').eq(a_ind).show().siblings().hide();
+                }
+                
+                $(this).hide();
+            });
+        });
+        </script>
+    </body>
+</html>

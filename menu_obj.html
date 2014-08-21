@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>menu</title>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <STYLE TYPE="text/css">
+            *{ padding: 0; margin: 0; font-size: 12px; line-height: 18px;}
+            ul,li{ list-style: none;}
+            #menu{ width: 300px; margin: 0 auto;}
+            #menu>li{ float: left; position: relative; background: #f1f1f1;}
+            #menu>li>a{ float: left; line-height: 30px; color: #333; text-decoration: none; width: 100px; text-align: center;}
+            #menu>li>a:hover{ color: #000;}
+            #menu>li>ul{ position: absolute; left: 0; top: 30px; display: none; background: #f1f1f1;}
+            #menu>li>ul a{ display: block; width: 100px; height: 24px; line-height: 24px; color: #999; text-decoration: none; text-align: center;}
+            #menu>li>ul a:hover{ color: #444; background: #ddd;}
+            #menu>li.drop>ul{ display: block;}
+
+            .section {
+    clear: both;
+    padding: 0px;
+    margin: 0px;
+}
+
+/*  COLUMN SETUP  */
+.col {
+    display: block;
+    float:left;
+    margin: 1% 0 1% 1.6%;
+}
+.col:first-child { margin-left: 0; }
+
+/*  GRID OF THREE  */
+.span_3_of_3 {
+    width: 100%;
+}
+.span_2_of_3 {
+    width: 66.1%;
+}
+.span_1_of_3 {
+    width: 32.2%;
+}
+
+/*  GRID OF FOUR  */
+.span_4_of_4 {
+    width: 100%;
+}
+.span_3_of_4 {
+    width: 74.6%;
+}
+.span_2_of_4 {
+    width: 49.2%;
+}
+.span_1_of_4 {
+    width: 23.8%;
+}
+
+/*  GROUPING  */
+.group:before,
+.group:after {
+    content:"";
+    display:table;
+}
+.group:after {
+    clear:both;
+}
+        </STYLE>
+	</head>
+<body>
+    <div class="section group">
+        <div class="col span_1_of_3">
+        This is column 1
+        </div>
+        <div class="col span_1_of_3">
+        This is column 2
+        </div>
+        <div class="col span_1_of_3">
+        This is column 3
+        </div>
+    </div>
+    <div class="section group">
+        <div class="col span_1_of_4">
+        This is column 1
+        </div>
+        <div class="col span_1_of_4">
+        This is column 2
+        </div>
+        <div class="col span_1_of_4">
+        This is column 3
+        </div>
+        <div class="col span_1_of_4">
+        This is column 4
+        </div>
+    </div>
+    <ul id="menu">
+
+    </ul>
+    <script type="text/javascript">
+        var menu_arr = [
+            {
+                'text':'首页',
+                'href':'index.html'
+            },
+            {
+                'text':'新闻',
+                'href':'news.html',
+                'submenu': [
+                    {
+                        'text':'sub1',
+                        'href':'sub1.html'
+                    },
+                    {
+                        'text':'sub2',
+                        'href':'sub2.html'
+                    }
+                ]
+            },
+            {
+                'text':'联系我们',
+                'href':'contact_us.html',
+                'submenu': [
+                    {
+                        'text':'sub1',
+                        'href':'sub1.html'
+                    },
+                    {
+                        'text':'sub2',
+                        'href':'sub2.html'
+                    }
+                ]
+            }
+        ];
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<head>
+<meta charset="utf-8">
+<title>test</title>
+<script type="text/javascript" src="js/jquery.js?v=1.4.4"></script>
+</head>
+<body>
+<form method="post" action="services/upload2.php" id="upload_form" target="upload_target" enctype="multipart/form-data">
+    <input id="upload_photo" type="file" name="upload"/>
+    <input class="form_submit" type="submit" value="上传图片" id="upload_button"/>
+</form>
+<div id="show"></div>
+<iframe src="" name="upload_target" id="upload_target"></iframe>
+<script type="text/javascript">
+(function($){
+    $(document).ready(function(){
+        uploadDone = function(obj){
+            if (obj.success) {
+                $('#show').html('<img id="thumbnail" src='+obj.file_name+' />');    
+            }
+
+        };
+    });
+}(jQuery));
+var uploadDone;
+</script>
+</body>

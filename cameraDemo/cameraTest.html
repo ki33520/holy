@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0">
+	<title>Demo</title>
+	<script src = "js/jquery-1.8.3.min.js"></script>
+	<script src = "js/createjs.min.js"></script>
+
+
+	<style>
+*{margin:0;padding:0;}  
+a{text-decoration:none;}  
+.btn_addPic{  
+display: block;  
+position: relative;  
+width: 140px;  
+height: 39px;  
+overflow: hidden;  
+border: 1px solid #EBEBEB;  
+background: none repeat scroll 0 0 #F3F3F3;  
+color: #999999;  
+cursor: pointer;  
+text-align: center;  
+}  
+.btn_addPic span{display: block;line-height: 39px;}  
+.btn_addPic em {  
+background:url(http://p7.qhimg.com/t014ce592c1a0b2d489.png) 0 0;  
+display: inline-block;  
+width: 18px;  
+height: 18px;  
+overflow: hidden;  
+margin: 10px 5px 10px 0;  
+line-height: 20em;  
+vertical-align: middle;  
+}  
+.btn_addPic:hover em{background-position:-19px 0;}  
+.filePrew {  
+display: block;  
+position: absolute;  
+top: 0;  
+left: 0;  
+width: 140px;  
+height: 39px;  
+font-size: 100px; /* 增大不同浏览器的可点击区域 */  
+opacity: 0; /* 实现的关键点 */  
+filter:alpha(opacity=0);/* 兼容IE */  
+}  
+
+#testCanvas{border: 1px solid #ccc;}
+
+	</style>
+
+</head>
+
+<body>
+
+<form>
+	<a class="btn_addPic" href="javascript:void(0);">
+		<span><em>+</em>添加图片</span>
+		<input class="filePrew" type="file" id="take-picture" accept="image/*" capture="camera">
+	</a>
+</form> 
+
+<div id="pictureBlock">
+	<img src="" id="showPicture" />
+</div>
+
+<canvas id="testCanvas" width="250" height="250"></canvas>
+
+<script>
+
+var windowW = $(window).width();
+var windowH = $(window).height();
+
+var rx = windowW/2;
+var ry = windowH/2;
+
+//$("#testCanvas").attr({width:windowW,height:windowH});
+
+canvas = document.getElementById("testCanvas");
+
+windowW = window.innerWidth;
+windowH = window.innerHeight;
+
+var context = canvas.getContext('2d');
+var x = 0;
+var y = 0;
+var width = windowW;
+var height = windowH;
+
+
+/*var addImg = function(bigUrl){
+	var imageObj = new Image();
+	imageObj.onload = function() {
+		context.drawImage(imageObj, x, y, height, width).rotate(90);
+	};
+	imageObj.src = bigUrl;
+}*/
+
+/*var addImg = function(bigUrl){
+var c=document.getElementById("testCanvas");  
+var cxt=c.getContext("2d");  
+cxt.translate(rx,ry);
+cxt.rotate(0);  
+var img=new Image();  
+ 
+img.onload=function(){    
+    cxt.drawImage(img,-rx,-ry,height, width);   
+    cxt.save();
+}  
+
+img.src=bigUrl; 
+}*/
+
+
+
+
+stage = new createjs.Stage(canvas);
+//createjs.Touch.enable(stage);
+createjs.Ticker.setFPS(24);
+createjs.Ticker.addListener(stage);
+
+function tick() {
+    stage.update();
+}
+
+createjs.Bitmap.prototype.setWidth = function(w)
+{       
+    if (this.image.width == 0) return;
+    
+    this.scaleX = w / this.image.width;
+}
+    
+createjs.Bitmap.prototype.setHeight = function(h)
+{
+    if (this.image.height == 0) return;
+
+    this.scaleY = h / this.image.height;
+}
+
+createjs.Bitmap.prototype.changeSize = function(s)
+{
+	//alert(s);
+
+    if (this.image.height == 0 || this.image.width == 0) return;
+
+    var w = this.image.width;
+    var h = this.image.height;
+    //alert(w+"///"+h);
+    if(w > h){
+    	//alert(1);
+    	var b = w/h*250;
+    	//alert(b);
+    	this.scaleX = b / this.image.width;
+    	this.scaleY = b / this.image.height;
+    	this.rotation = 90;
+    	this.x = 250;
+    }else{
+    	var b = h/w*250;
+    	this.scaleX = s / this.image.width;
+    	this.scaleY = b / this.image.height;
+    }
+
+    
+}
+
+var addImg = function(bigUrl){
+	var bmp = new createjs.Bitmap(bigUrl);
+	var editDv = new createjs.Container();
+	// var img = new Image();
+	// img.onload = function(){
+
+	// 	imageWidth = img.width,
+	// 	imageHeight = img.height;
+
+	// 	if(imageWidth > imageHeight){
+			
+	// 		imageWidth = img.width,
+	// 		imageHeight = img.height;
+
+			
+
+	// 		//editDv.regX = windowW/2;
+	// 		//editDv.regY = windowH/2;
+
+	// 		editDv.rotation = 90;
+
+	// 		editDv.x = 240;
+	// 		editDv.y = 0;
+			
+	// 		alert(img.height+"///"+img.width)
+
+	// 		bmp.scaleY = windowW/imageHeight;
+	// 		bmp.scaleX = windowH/imageWidth;
+			
+	// 		bmp.scaleY = windowW/imageWidth;
+	// 		bmp.scaleX = windowH/imageHeight;
+	// 		bmp.scaleY = windowH/imageHeight;
+			
+
+	// 		bmp.x = windowW/2;
+	// 		bmp.y = windowH/2;
+	// 		bmp.x = 320;
+	// 		bmp.y = 320;
+
+			
+	// 	}
+	// 	editDv.addChild(bmp);
+	// 	stage.addChild(editDv)
+		
+
+	// }
+	// img.src = bigUrl;
+	
+	bmp.image.onload = function(){
+	    //bmp.setWidth(250);
+	    //bmp.setHeight(250);
+	    bmp.changeSize(250);
+	}
+
+	//editDv.addChild(bmp);
+	stage.addChild(bmp);
+	
+}
+
+	
+var filePicture = document.getElementById('take-picture');
+var showPicture = document.getElementById('showPicture');
+
+filePicture.onchange = function(e){
+	var files = e.target.files,
+        file;
+    if (files && files.length > 0) {
+        file = files[0];
+        try {
+            // Get window.URL object
+            var URL = window.URL || window.webkitURL;
+
+            // Create ObjectURL
+            var imgURL = URL.createObjectURL(file);
+
+            // Set img src to ObjectURL
+            //showPicture.src = imgURL;
+
+            addImg(imgURL);
+
+            // Revoke ObjectURL
+            URL.revokeObjectURL(imgURL);
+        }
+        catch (e) {
+            try {
+                // Fallback if createObjectURL is not supported
+                var fileReader = new FileReader();
+                fileReader.onload = function (e) {
+                    showPicture.src = event.target.result;
+                };
+                fileReader.readAsDataURL(file);
+            }
+            catch (e) {
+                //
+                var error = document.querySelector("#error");
+                if (error) {
+                    error.innerHTML = "Neither createObjectURL or FileReader are supported";
+                }
+            }
+        }
+    }
+}
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script src="js/jquery.min.js" type="text/javascript"></script>
+    </head>
+    <body>
+<div id="product" class="form-group">
+    <label for="query">产品型号</label>
+    <input type="text" data="" value="" id="query" class="form-control product" autocomplete="off">
+</div>
+<div class="form-group">
+    <button class="btn btn-primary addInput" type="button">添加产品型号</button>
+</div>
+<div class="form-group">
+      <div class="alert alert-danger submit-tip hide"></div>
+    </div>
+    <button style="margin-bottom: 10px" class="btn btn-success btn-lg btn-block submit-buy" type="button">确认提交</button>
+<script src="js/jquery.autocomplete.min.js"></script>
+<script type="text/javascript">
+var ReturnBuy = function() {
+  this.init();
+}
+ReturnBuy.prototype.init = function() {
+  console.log('ReturnBuy init');
+  $('.submit-buy').on('click', this.submitBuy.bind(this));
+  this.getModel();
+  $('.addInput').on('click', this.addinput.bind(this));
+}
+
+ReturnBuy.prototype.inputBindData = function(result){
+    
+};
+ReturnBuy.prototype.getModel = function() {
+    var self = this;
+    $.ajax({
+        'type': 'GET',
+        'dataType': 'json',
+        'url': 'pro.json',
+        'success': function(result) {
+            $('.product').each(function(index,item){
+                $(item).autocomplete({
+                    'lookup': result,
+                    'onSelect': function(data) {
+                        $(item).data(data);
+                    }
+                });
+            })
+            
+        }
+    });
+}
+ReturnBuy.prototype.addinput = function() {
+  var self = this;
+  if(this.i){
+    this.i ++;
+  }else{
+    this.i = 1;
+  }
+  if(this.i<5){
+    $("#product").append('<input type="text" class="form-control product" id="query'+this.i+'" value="">');
+    this.getModel();
+  }
+  
+}
+ReturnBuy.prototype.submitBuy = function() {
+    var self = this;
+    var bl = true;
+    $('.product').each(function(el,item){
+        var cl = $(item).val();
+        console.log(cl+'=='+$(item).data('value'))
+        if (cl != $(item).data('value') || $(item).data('value') == undefined) {
+          self.displayTip(true, '产品型号不对!');
+          bl = false;
+        } 
+        if(el==0){
+          model = $(item).val();
+        }else{
+          model = model+'|'+$(item).val();
+        }
+      })
+    if(!bl){
+        return false;
+    }
+    console.log('done');
+}
+ReturnBuy.prototype.displayTip = function(isShow, tip) {
+  console.log(tip)
+  $('.submit-tip').html(tip);
+  if (isShow) {
+    $('.submit-tip').removeClass('hide');
+  } else {
+    $('.submit-tip').addClass('hide');
+  }
+}
+new ReturnBuy();
+</script>
+    </body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easing.min.js"></script>
+    
+
+    <title>Slider</title>
+    <style type="text/css">
+        body{ color: #000;}
+        .row{ position: relative; min-height: 200px; background-color: #ccc; margin-bottom: 20px; padding: 10px;}
+        .row .animated{ position: absolute; color: #333;}
+        .row .animated h3{ margin: 0 0 10px;}
+        .row .animated p{ color: #999;}
+        .row .animated a{ color: #044C98;}
+
+        .ux_banner .button {margin: 10px 5px 10px 5px; }
+        .ux_banner .text-right .button {margin: 10px 0 10px 10px; }
+        .ux_banner .text-left .button {margin: 10px 10px 10px 0px; }
+        .ux_banner .center { top: auto; text-align: center; left: 10%; right: 10%;}
+        .ux_banner .left {left: 10%; right: auto; text-align: left; }
+        .ux_banner .far-left {left: 20px; right: auto; text-align: left; }
+        .ux_banner .right {left: auto; right: 10%; text-align: right; }
+        .ux_banner .far-right {left: auto; right: 20px; text-align: right; }
+        .ux_banner .center .tx-div {margin: 0 auto; }
+        .ux_banner .left .tx-div, .ux_banner .far-left .tx-div {margin: 0 auto 0 0; }
+        .ux_banner .right .tx-div, .ux_banner .far-right .tx-div {margin: 0 0 0 auto; }
+        .ux_banner .text-center .tx-div {margin: 0 auto; }
+        .ux_banner .text-left .tx-div {margin: 0 auto 0 0; }
+        .ux_banner .text-right .tx-div {margin: 0 0 0 auto; }
+        .ux_banner .tx-div {margin-top: 15px; margin-bottom: 15px; }
+        .ux_banner .inner.top {top: 12%; margin: 0 auto; bottom: auto; }
+        .ux_banner .inner.bottom {bottom: 12%; margin: 0 auto; top: auto; }
+        .ux_banner .inner.far-bottom {bottom: 0; top: auto; }
+        .ux_banner .inner.far-top {top: 0; bottom: auto; }
+    </style>
+</head>
+
+<body>
+    <div class="row">
+        <div class="ux_banner">
+            <div style="width: 40%;" data-animate="fadeInLeft" class="fadeInText inner left center  animated  text-center  fadeInLeft start-anim">
+                <h3 style="font-size: 180%; line-height: 120%; color: #555; font-style: nomal;">以雪域的纯<br>焕肌肤的净</h3>
+                <p><span style="font-size: 70%; line-height: 120%; color: #8a8a8a;">冰肌水系列</span><br><a href="/dignity/index01.html" style="font-size: 65%; line-height: 120%;">查看详情</a><br></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="ux_banner">
+            <div style="width: 40%;" data-animate="fadeInRight" class="fadeInText inner right center  animated  text-center  fadeInRight start-anim">
+                <h3 style="font-size: 180%; line-height: 120%; color: #555; font-style: nomal;">以雪域的纯<br>焕肌肤的净</h3>
+                <p><span style="font-size: 70%; line-height: 120%; color: #8a8a8a;">冰肌水系列</span><br><a href="/dignity/index01.html" style="font-size: 65%; line-height: 120%;">查看详情</a><br></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="ux_banner">
+            <div style="width: 40%;" data-animate="fadeInUp" class="fadeInText inner top center animated  text-center  fadeInUp start-anim">
+                <h3 style="font-size: 180%; line-height: 120%; color: #555; font-style: nomal;">以雪域的纯<br>焕肌肤的净</h3>
+                <p><span style="font-size: 70%; line-height: 120%; color: #8a8a8a;">冰肌水系列</span><br><a href="/dignity/index01.html" style="font-size: 65%; line-height: 120%;">查看详情</a><br></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="ux_banner">
+            <div style="width: 40%;" data-animate="fadeInDown" class="fadeInText inner bottom center  animated  text-center  fadeInDown start-anim">
+                <h3 style="font-size: 180%; line-height: 120%; color: #555; font-style: nomal;">以雪域的纯<br>焕肌肤的净</h3>
+                <p><span style="font-size: 70%; line-height: 120%; color: #8a8a8a;">冰肌水系列</span><br><a href="/dignity/index01.html" style="font-size: 65%; line-height: 120%;">查看详情</a><br></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="ux_banner">
+            <div style="width: 40%;" data-animate="fadeIn" class="fadeInText inner top center  animated  text-center  fadeIn start-anim">
+                <h3 style="font-size: 180%; line-height: 120%; color: #555; font-style: nomal;">以雪域的纯<br>焕肌肤的净</h3>
+                <p><span style="font-size: 70%; line-height: 120%; color: #8a8a8a;">冰肌水系列</span><br><a href="/dignity/index01.html" style="font-size: 65%; line-height: 120%;">查看详情</a><br></p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    $( document ).ready(function() {
+        $(window).scroll(function(){
+            textAnimate(true);
+        });
+        var am = function(item,bl){
+            var path = '';
+            var tp = $(item).attr('data-animate') ? $(item).attr('data-animate') : null;
+            if(tp){
+                switch(tp){
+                    case 'fadeInLeft':
+                        path = 'Left';
+                        break;
+                    case 'fadeInRight':
+                        path = 'Right';
+                        break;
+                    case 'fadeInUp':
+                        path = 'Top';
+                        break;
+                    case 'fadeInDown':
+                        path = 'Bottom';
+                        break;
+                    default:
+                        path = ''
+                };
+            };
+            var obj = {};
+            if(bl){
+                $(item).removeClass('fadeInText');
+                obj['opacity'] = 1;
+                if(path){
+                    obj['margin'+path]= 0;
+                    var dt = 500;
+                }else{
+                    var dt = 1500;
+                }
+                $(item).delay(10).animate(
+                    obj,
+                    {
+                        duration: dt,
+                        easing: 'easeOutCirc'
+                    }
+                );
+            }else{
+                obj['opacity'] = 0;
+                if(path){
+                    obj['margin'+path]= -50;
+                }
+                $(item).css(obj);
+            };
+            
+        };
+        var textAnimate = function(bl){
+            var bl = bl ? bl : false;
+            $('.fadeInText').each(function(index,item){
+                var scrollTop = $(window).scrollTop(),
+                    windowH = $(window).height(),
+                    offsetTop = $(item).offset().top;
+                    itemH = $(item).outerHeight();
+                if(!bl){
+                    am(item);
+                }
+                if(windowH+scrollTop-itemH>=offsetTop){
+                    am(item,true);
+                }
+            });
+        };
+        textAnimate();
+    });
+    </script>
+    
+</body>
+</html>

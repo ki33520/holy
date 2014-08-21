@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery Mobile Demo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
+</head>
+  
+<body>
+  
+<div data-role="page" id="home">
+  
+    <div data-role="header">
+        <h1>jQuery Mobile Demo</h1>
+    </div>
+  
+    <div data-role="content">
+        <p>主体内容</p>
+    </div>
+  
+    <div data-role="footer">
+        <h2>Footer</h2>
+    </div>
+  
+</div>
+<script type="text/javascript">
+	$.mobile.orientationChangeEnabled = false;
+	$(document).bind('mobileinit', function(){
+	    $.event.special.swipe.horizontalDistanceThreshold = 100; // 修改触发 swipe 事件的最小水平拖曳距离为 100(px)
+	    $.event.special.swipe.verticalDistanceThreshold = 120; // 修改触发 swipe 事件的最大垂直拖曳距离为 120 (px)
+	    $.mobile.orientationChangeEnabled = false; // 默认禁止触发 orientationChangeEnabled
+	});
+</script>
+</body>
+</html>

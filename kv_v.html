@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>Maysu</title>
+	<link rel="stylesheet" type="text/css" media="all" href="css/main.css" />
+	<script src="js/jquery.min.js" type="text/javascript"></script>
+	<script src="js/jquery.easing.min.js" type="text/javascript"></script>
+
+</head>
+
+<body class="index_page">
+	
+	<p>
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br /></p>
+	<div class="index_kv">
+		<ul class="index_kv_list">
+			<li><img src="http://dev.iprotime.com/hide/maysu/images/index_kv_1.jpg" /></li>
+			<li><img src="http://dev.iprotime.com/hide/maysu/images/index_kv_2.jpg" /></li>
+			<li><img src="http://dev.iprotime.com/hide/maysu/images/index_kv_3.jpg" /></li>
+			<li><img src="http://dev.iprotime.com/hide/maysu/images/index_kv_4.jpg" /></li>
+		</ul>
+	</div>
+	<p>
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br />测试文字<br />
+
+测试文字<br />
+
+测试文字<br />
+
+测试文字<br /></p>
+	<style type="text/css">
+		*{ padding: 0; margin: 0;}
+		img{ width: 100%;}
+		.index_kv{ position: relative; width: 100%; overflow: hidden;}
+		.index_kv ul{}
+		.index_kv ul li{ display: none;}
+		.index_kv ul li:first-child{ display: list-item;}
+		.index_kv ul li img{ width: 90%; margin: 0 auto; max-width: 100%; display: block;}
+	</style>
+	<script type="text/javascript">
+		for(var i=0; i<10; i++){
+			var img = $('<img class=i'+i+' />');
+			if(i%3 == 0){
+				var li = $('<li class="l'+i/3+'">');
+				li.appendTo($('#ul'));
+			}
+			img.appendTo(li);
+		}
+		var kh,
+			active_index = 0;
+		$('.index_kv ul li img:eq(0)').load(function(){
+			kh = $(this).height();
+			$('.index_kv').height(kh);
+		});
+		$(window).resize(function(){
+			kh = $('.index_kv ul li img:eq(0)').height();
+			$('.index_kv').height(kh);
+		});
+		var hoverBL = false;
+		$('.index_kv').hover(function(){
+			hoverBL = true;
+		},function(){
+			hoverBL = false;
+		});
+		var slidebl = false;
+		var slide = function(_num){
+			if(!slidebl){
+				slidebl = true;
+				active_index = active_index + _num;
+				if(active_index<0){
+					active_index = 0;
+				}
+				if(active_index>$('.index_kv ul li').length-1){
+					active_index = $('.index_kv ul li').length-1;
+				}
+				$('.index_kv_list').stop().animate({
+					marginTop : -kh*active_index
+				},{
+					duration: 500,
+					easing: 'easeInOutCirc',
+					complete: function(){
+						slidebl = false;
+					}
+				});
+			}
+		};
+		var vc = function(){
+			$('html, body').animate({
+				scrollTop: $('.index_kv').offset().top
+			},{
+				duration: 500,
+				easing: 'easeInOutCirc',
+				complete: function(){
+					console.log(active_index<$('.index_kv ul li').length-1)
+				}
+			});
+		}
+		$('.index_kv').on('DOMMouseScroll mousewheel', function (e) {
+			kh = $('.index_kv ul li img:eq(0)').height();
+			$('.index_kv').height(kh);
+			$('.index_kv ul li').show();
+			
+				//console.log(active_index)
+				if (e.originalEvent.detail > 0 || e.originalEvent.wheelDelta < 0) {
+					dir = 'down';
+					if(active_index<$('.index_kv ul li').length-1 || slidebl){
+						if(active_index<$('.index_kv ul li').length-1){
+							slide(1);
+							//$(window).scrollTop($('.index_kv').offset().top);
+						}
+						
+						e.preventDefault();
+					}else{
+						//console.log($('html, body').scrollTop())
+					}
+				} else {
+					dir = 'up';
+					if(active_index>0 || slidebl){
+						if(active_index>0){
+							slide(-1);
+							//$(window).scrollTop($('.index_kv').offset().top);
+						}
+						e.preventDefault();
+					}
+				}
+				
+			
+		})
+	</script>
+</body>
+</html>

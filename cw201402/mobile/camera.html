@@ -1,0 +1,513 @@
+<!doctype html>
+
+<!--[if IEMobile 7]><html class="no-js iem7 oldie"><![endif]-->
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+
+<!-- For all browsers -->
+
+<head>
+<meta charset="utf-8">
+
+<title></title>
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=1, user-scalable=yes">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/layout.css">
+
+
+<!--[if (lt IE 9) & (!IEMobile)]>
+<script src="js/libs/selectivizr-min.js"></script>
+<![endif]-->
+
+<!-- JavaScript -->
+<script src="js/libs/modernizr-2.0.6.min.js"></script>
+
+</head>
+
+<body>
+	<div id="main">
+        <div id="camera01">
+            <div><img src="images/camera_01.jpg" /></div>
+
+    		<form id="beginCamera">
+                <img src="images/camera_02.jpg" />
+                <div id="fileBlock">
+        			<a class="btn_addPic" href="javascript:void(0);">
+        				<input class="filePrew" type="file" id="take-picture" accept="image/*" capture="camera">
+        			</a>
+                </div>
+    		</form> 
+
+            <div><img src="images/camera_03.jpg" /></div>
+
+        </div>
+
+        <div id="camera02" class="">
+
+            <div id="showCanvas">
+                <div><img src="images/camera_05.jpg" /></div>
+                <div id="canvas">
+                    <img src="" id="resImg" style="display:none;" />
+                    <canvas id="photoCanvas" width="583" height="502"></canvas>
+                    <span id="leftButton"><img src="images/left.jpg" /></span>
+                    <span id="rightButton"><img src="images/right.jpg" /></span>
+                </div>
+
+                <div id="tmplList">
+                    <span class="left"><img src="images/camera_06.jpg" /></span>
+                    <span class="circle active">1</span>
+                    <span class="circle">2</span>
+                    <span class="circle">3</span>
+                    <span class="circle">4</span>
+                    <span class="circle">5</span>
+                </div>
+
+            </div>
+
+            <div class="text-center">
+                <a id="submitButton" href="javascript:void(0)"><img src="images/camera_07.jpg" /></a>
+            </div>
+
+    		
+        </div>
+
+	</div>
+
+<!-- Scripts -->
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/script.js"></script>
+<script src="js/mylibs/helper.js"></script>
+<script type="text/javascript" src="js/createjs.js"></script>
+<script src="js/megapix-image.js"></script>
+
+<!--[if (lt IE 9) & (!IEMobile)]>
+<script src="js/libs/imgsizer.js"></script>
+<![endif]-->
+
+<script>
+
+
+stage = new createjs.Stage("photoCanvas");
+createjs.Ticker.setFPS(24);
+
+createjs.Ticker.on("tick", tick);
+
+function tick() {
+    stage.update();
+}
+
+createjs.Bitmap.prototype.setWidth = function(w)
+{       
+    if (this.image.width == 0) return;
+    
+    this.scaleX = w / this.image.width;
+}
+    
+createjs.Bitmap.prototype.setHeight = function(h)
+{
+    if (this.image.height == 0) return;
+
+    this.scaleY = h / this.image.height;
+}
+
+createjs.Bitmap.prototype.changeSize = function(sw,sh){
+
+    if (this.image.height == 0 || this.image.width == 0) return;
+    var w = this.image.width;
+    var h = this.image.height;
+
+    var iw = this.image.naturalWidth, ih = this.image.naturalHeight;
+    alert(iw+"///"+ih)
+    
+    if(w > h){
+    	var b = w/h*sw;
+        //var b = sw/w*h
+    	this.scaleX = b / w;
+    	this.scaleY = b / h;
+    	this.rotation = 90;
+    	this.x = sw;
+
+    }else{
+    	var b = h/w*sw;
+    	this.scaleX = b / this.image.width;
+    	this.scaleY = b / this.image.height;
+    }
+    
+}
+
+var shuiying;
+
+
+// var addImg = function(bigUrl){
+//     var canvas = document.getElementById('photoCanvas');
+//     var context = canvas.getContext('2d');
+//     var x = 0;
+//     var y = 0;
+//     var width = 583;
+//     var height = 502;
+//     var imageObj = new Image();
+
+//     console.log(bigUrl)
+
+//     imageObj.onload = function() {
+
+        
+//         imageObj.height *= 583/imageObj.width;
+//         imageObj.width = 583;
+
+//         console.log("fefefe");
+//         $("#camera01").hide();
+//         $("#camera02").addClass("show");
+//         context.drawImage(imageObj, x, y, imageObj.width, imageObj.height);
+//     };
+//     imageObj.src = bigUrl;
+// }
+
+var addImg = function(bigUrl){
+
+    // var imageObj = new Image();
+
+    // imageObj.onload = function() {
+    //     imageObj.height = 250;
+    //     imageObj.width = 250;
+    //     var bmp = new createjs.Bitmap(imageObj);
+    //     var editDv = new createjs.Container();
+    //     stage.addChild(bmp);
+    //     $("#camera01").hide();
+    //     $("#camera02").addClass("show");
+    //     shuiying = new createjs.Container();
+    //     stage.addChild(shuiying);
+    //     shuiyingFun(0);
+    // }
+
+    // imageObj.src = bigUrl;
+
+	var bmp = new createjs.Bitmap(bigUrl);
+	var editDv = new createjs.Container();
+	
+	bmp.image.onload = function(){
+	    //bmp.changeSize(583,502);
+	}
+
+	stage.addChild(bmp);
+    $("#camera01").hide();
+    $("#camera02").addClass("show");
+	shuiying = new createjs.Container();
+    stage.addChild(shuiying);
+    shuiyingFun(0);
+}
+
+var sy_obj = [
+    {
+        img:"images/shuiyin01.png",
+        w:229,
+        h:186,
+        x:330,
+        y:284,
+        sj_x:322,
+        sj_y:282,
+        sd_x:465,
+        sd_y:315,
+        sj_size:62,
+        sd_size:18,
+        color:"#ffffff"
+    },
+    {
+        img:"images/shuiyin02.png",
+        w:82,
+        h:296,
+        x:439,
+        y:27,
+        sj_x:439,
+        sj_y:95,
+        sd_x:520,
+        sd_y:115,
+        sj_size:36,
+        sd_size:11,
+        color:"#ffffff"
+    },
+    {
+        img:"images/shuiyin03.png",
+        w:89,
+        h:313,
+        x:52,
+        y:122,
+        sj_x:52,
+        sj_y:190,
+        sd_x:137,
+        sd_y:212,
+        sj_size:36,
+        sd_size:11,
+        color:"#ffffff"
+    },
+    {
+        img:"images/shuiyin04.png",
+        w:123,
+        h:333,
+        x:30,
+        y:20,
+        sj_x:48,
+        sj_y:98,
+        sd_x:131,
+        sd_y:120,
+        sj_size:36,
+        sd_size:11,
+        color:"#55abd4"
+    },
+    {
+        img:"images/shuiyin05.png",
+        w:302,
+        h:129,
+        x:137,
+        y:352,
+        sj_x:200,
+        sj_y:360,
+        sd_x:308,
+        sd_y:386,
+        sj_size:47,
+        sd_size:14,
+        color:"#55abd4"
+    }
+]
+
+var syNum = 0;
+
+var shuiyingFun = function(n){
+    var obj = sy_obj[n];
+    shuiying.removeAllChildren();
+    var syImg = new createjs.Bitmap(obj.img);
+    syImg.x = obj.x;
+    syImg.y = obj.y;
+    shuiying.addChild(syImg);
+    syNum = n;
+
+    var d = new Date();
+    var h = d.getHours();
+    var sd = "am";
+    if(h>12){
+        sd = "pm";
+    }
+    if(parseInt(h) < 10){
+        h = "0"+h;
+    }
+    var s = d.getMinutes();
+    if(parseInt(s) < 10){
+        s = "0"+s;
+    }
+    var timeText = h+":"+s;
+
+    var sjtext = new createjs.Text(timeText,obj.sj_size+"px Myriad Pro", obj.color);
+    var sdtext = new createjs.Text(sd,obj.sd_size+"px Myriad Pro", obj.color);
+    sjtext.x = obj.sj_x;
+    sjtext.y = obj.sj_y;
+    sdtext.x = obj.sd_x;
+    sdtext.y = obj.sd_y;
+    shuiying.addChild(sjtext);
+    shuiying.addChild(sdtext);
+
+    $(syList).removeClass("active");
+    $(syList[n]).addClass("active");
+}
+
+var syList = $("#tmplList .circle");
+syList.each(function(index,el){
+    $(el).bind("click",function(){
+        
+        shuiyingFun(index);
+    })
+})
+
+$("#rightButton").bind("click",function(){
+    syNum++;
+    if(syNum >= 5){
+        syNum = 0;
+    }
+    shuiyingFun(syNum);
+})
+
+$("#leftButton").bind("click",function(){
+    syNum--;
+    if(syNum < 0){
+        syNum = 4;
+    }
+    shuiyingFun(syNum);
+})
+
+var createStep3 = function(url){
+    $("#camera02").html("");
+    var content = $("<div>").attr("class","stepContent").appendTo($("#camera02"));
+    var step3 = $("<div>").attr("id","step3").appendTo(content);
+    $("<img>").attr("src","images/camera_08.jpg").appendTo(step3);
+    $("<img>").attr("src",url).appendTo(step3);
+    $("<img>").attr("src","images/product01.png").attr("id","step3Img").appendTo($("#camera02"));
+    var button = $("<a>").attr("id","shareButton").attr("href","login.php?t=s").html("<img src='images/submitShare.jpg' />").appendTo(content);
+}
+
+var createImg = function(imgURL){
+    //console.log(imgURL)
+    var file = filePicture.files[0];
+    var mpImg = new MegaPixImage(file);
+    var sw = 538, sh = 502
+    var img = new Image()
+    img.onload = function() {
+        var w = img.width, h = img.height;
+        //console.log(w);
+        //console.log(h);
+        if(w > h){
+            y = 583;
+            x = parseInt(583/2448*3264);
+            setTimeout(function(){
+                mpImg.render(resImg, { width: x, height: y, orientation: 6  });
+            },500)
+            
+            //document.getElementById('ttt').innerHTML = x;
+        }else{
+            x = 583;
+            y = parseInt(583/2448*3264);
+            setTimeout(function(){
+                mpImg.render(resImg, { width: x, height: y, orientation: 6  });
+            },500)
+        }
+
+    }
+    img.src = imgURL
+}
+
+var filePicture = document.getElementById('take-picture');
+
+filePicture.onchange = function(e){
+	var files = e.target.files,
+        file;
+
+    if (files && files.length > 0) {
+        file = files[0];
+        //createImg();
+        try {
+            // Get window.URL object
+            var URL = window.URL || window.webkitURL;
+
+            // Create ObjectURL
+            var imgURL = URL.createObjectURL(file);
+
+            // Set img src to ObjectURL
+            //showPicture.src = imgURL;
+
+            createImg(imgURL);
+
+            // Revoke ObjectURL
+            URL.revokeObjectURL(imgURL);
+        }
+        catch (e) {
+            try {
+                // Fallback if createObjectURL is not supported
+                // var fileReader = new FileReader();
+                fileReader.onload = function (e) {
+                    //showPicture.src = event.target.result;
+                    createImg(event.target.result);
+                };
+                fileReader.readAsDataURL(file);
+            }
+            catch (e) {
+                //
+                var error = document.querySelector("#error");
+                if (error) {
+                    error.innerHTML = "Neither createObjectURL or FileReader are supported";
+                }
+            }
+        }
+    }
+}
+
+$("#submitButton").bind("click",function(){
+	var content = stage.toDataURL("ffffff","image/jpg");
+	// console.log(content)
+	// var　xmlHttp;
+ //    try{
+ //        xmlHttp=new　XMLHttpRequest();
+ //        alert("1")
+ //    }catch (e){
+ //        try{
+ //            xmlHttp=new　ActiveXObject("Msxml2.XMLHTTP");
+ //            alert("2")
+ //        }catch　(e){
+ //            try{
+ //                xmlHttp=new　ActiveXObject("Microsoft.XMLHTTP");
+ //                alert("3")
+ //            }catch　(e){
+ //                alert("e")
+ //                return　false;
+ //            }
+ //        }
+ //    }
+ //    xmlHttp.onreadystatechange=function(){
+ //        alert(xmlHttp.readyState)
+ //        if(xmlHttp.readyState==4){
+ //            alert(xmlHttp.status)
+ //            if(xmlHttp.status　==　200){
+ //                alert("success");
+ //                //product_block =  Recenspace(xmlHttp.responseBody);
+ //            }else{
+ //                alert('请求出错.');
+ //            }
+ //        }
+ //    }
+
+ //    //alert("success");
+
+ //    var url = "services/upload.php";
+ //    xmlHttp.open("POST",url,true);
+ //    xmlHttp.sendAsBinary(content);
+
+
+    $.ajax({
+        url:'services/upload.php',
+        type:'POST',
+        data:{imgDate:content},
+        //async:false,  //关闭异步
+        //dataType:'text',
+        //contentType:"application/json; charset=utf-8",  //注释掉后就可以传递data了
+        beforeSend:function(){
+            //alert("waitting");
+        },
+        error:function(XMLHttpRequest, textStatus, errorThrown){
+            //f_alert2("closeWaitting","");
+            alert("error");
+        },
+        success:function(msg){
+            //console.log(typeof(result))
+            if(msg.status == 1){
+                createStep3(msg.data);
+            }else{
+                alert(msg.message);
+            }
+        }
+    });
+})
+
+</script>
+
+<script>
+// iOS scale bug fix
+MBP.scaleFix();
+
+// Respond.js
+yepnope({
+	test : Modernizr.mq('(only all)'),
+	nope : ['js/libs/respond.min.js']
+});
+</script>
+
+</body>
+</html>

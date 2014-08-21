@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>适合手机界面显示的幻灯片切换代码</title>
+<link rel="stylesheet" type="text/css" href="css/css.css">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/slides.min.jquery.js"></script>
+
+</head>
+
+<body>
+<div class="slider_wrap">
+	<div id="txt"></div>
+	<ul id="slider">
+		<li><img src="images/01.jpg" /></li>
+		<li><img src="images/02.jpg" /></li>
+	</ul>
+</div>
+<style type="text/css">
+	html,body{ width: 100%;}
+	.slider_wrap{ width: 100%; overflow: hidden; }
+	#txt{ position: absolute; left: 0; top: 0; width: 200px; height: 200px; font-size: 50px; line-height: 50px; color: #fff;}
+	#slider{ width: 200%}
+	#slider li{ float: left; width: 50%;}
+	#slider li img{ width: 100%; float: left;}
+</style>
+<script type="text/javascript">
+	
+	var touchStart = function(e){
+		//e.preventDefault();
+		startNumber = e.pageX;
+		sy = e.pageY;
+	}
+	var move = false;
+	var touchMove = function(e){
+		//e.preventDefault();
+		endNumber = e.pageX;
+		ey = e.pageY;
+		yx = Math.abs(endNumber-startNumber)-Math.abs(ey-sy);
+		if(yx > 50 && Math.abs(endNumber-startNumber) > 50){
+			e.preventDefault();
+		}else{
+			motion.removeEventListener("touchmove", touchMove, false);
+			motion.removeEventListener("touchend", touchEnd, false);
+			motion.addEventListener("touchmove", touchMove, false);
+			motion.addEventListener("touchend", touchEnd, false);
+		}
+	}
+	var touchEnd = function(e){
+		if(move){
+			return false;
+		}
+		//e.preventDefault();
+		//endNumber = e.pageX;
+		if(yx > 50 && Math.abs(endNumber-startNumber) > 50){
+			var w = $('#slider li').width();
+			move = true;
+			if(endNumber > startNumber){
+				$('#slider').animate({'marginLeft':0},500,function(){
+					move = false;
+				});
+			}else{
+				$('#slider').animate({'marginLeft':-w},500,function(){
+					move = false;
+				});
+			}
+		}
+	}
+	var motion = document.getElementById("slider");
+	motion.addEventListener("touchstart", touchStart, false);
+	motion.addEventListener("touchmove", touchMove, false);
+	motion.addEventListener("touchend", touchEnd, false);
+</script>
+</body>
+</html>

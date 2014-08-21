@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>KV</title>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <style>
+            body{ font-size: 12px; line-height: 18px; overflow: hidden;}
+            *{ padding: 0; margin: 0;}
+            h1{ padding: 10px 0; margin: 10px 0; line-height: 2em;}
+            .clearfix:after { content: '\20'; display: block; height: 0; clear: both; }
+            .clearfix { *zoom: 1; }
+            ul{ list-style: none; margin: 0;}
+            .list_wrap{ overflow-x: auto; overflow-y: hidden; margin-right: 268px;}
+            .board_wrapper{ position: relative;}
+            .board_wrapper.disabled_all_widgets .list_wrap{ margin-right: 0;}
+            .content_list li{ margin: 0 5px; display: inline; float: left; background: #ccc; height: 200px; width: 19%; font-size: 50px; line-height: 100px; text-align: center;}
+            .bar{ height: 50px; position: relative;}
+            .icon_rightarrow{height:42px;right:0; top: 50px; overflow:hidden;position:fixed;text-decoration:none;z-index:4;width:42px;-webkit-transition-property:box-shadow,margin,left,color,width;transition-property:box-shadow,margin,left,color,width;-webkit-transition-duration:100ms;transition-duration:100ms;-webkit-transition-timing-function:ease-in;transition-timing-function:ease-in;cursor: pointer; color: #999;}
+            .icon_rightarrow span{background:#f0f0f0; color: #999; border-top-left-radius:3px;border-top-right-radius:0;border-bottom-right-radius:0;border-bottom-left-radius:3px;-webkit-box-shadow:0 0 6px rgba(0, 0, 0, 0.25), 0 0 1px rgba(0, 0, 0, 0.1);box-shadow:0 0 6px rgba(0, 0, 0, 0.25), 0 0 1px rgba(0, 0, 0, 0.1);-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;height:30px;margin:6px 0 0 12px;padding:6px 4px 6px 6px;position:absolute;right:0;top:0;width:26px;-webkit-transition-property:width,padding,color;transition-property:width,padding,color;-webkit-transition-duration:100ms;transition-duration:100ms;-webkit-transition-timing-function:ease-in;transition-timing-function:ease-in; cursor: pointer;}
+            .icon_rightarrow:hover{color:#393939}
+            .icon_rightarrow:hover span{width:30px;padding-right:2px; color: #393939;}
+            .board_widgets{background:#f0f0f0;-webkit-box-shadow:0 0 8px rgba(0, 0, 0, 0.25), -1px 0 1px rgba(0, 0, 0, 0.1);box-shadow:0 0 8px rgba(0, 0, 0, 0.25), -1px 0 1px rgba(0, 0, 0, 0.1);bottom:0;padding:12px 4px 0 14px;position:fixed;right:0;top:50px;-webkit-transition-property:-webkit-transform,width;transition-property:transform,width;-webkit-transition-duration:100ms;transition-duration:100ms;-webkit-transition-timing-function:ease-in;transition-timing-function:ease-in;-ms-transform:translateX(0);-webkit-transform:translateX(0);transform:translateX(0);width:250px;z-index:5}
+            .board_wrapper.disabled_all_widgets .board_widgets {
+                -webkit-box-shadow:none;box-shadow:none;-ms-transform:translateX(310px);-webkit-transform:translateX(310px);transform:translateX(310px)
+            }
+            .board_widgets .icon_leftarrow{height:42px;left:-42px;overflow:hidden;position:absolute;text-decoration:none;top:0;z-index:6;width:42px;-webkit-transition-property:box-shadow,margin,left,color,width;transition-property:box-shadow,margin,left,color,width;-webkit-transition-duration:100ms;transition-duration:100ms;-webkit-transition-timing-function:ease-in;transition-timing-function:ease-in;cursor: pointer; color: #999;}
+            .board_widgets .icon_leftarrow span{background:#f0f0f0;border-top-left-radius:3px;border-top-right-radius:0;border-bottom-right-radius:0;border-bottom-left-radius:3px;-webkit-box-shadow:0 0 6px rgba(0, 0, 0, 0.25), 0 0 1px rgba(0, 0, 0, 0.1);box-shadow:0 0 6px rgba(0, 0, 0, 0.25), 0 0 1px rgba(0, 0, 0, 0.1);-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;height:30px;margin:6px 0 0 12px;padding:6px 4px 6px 6px;position:absolute;right:0;top:0;width:26px;-webkit-transition-property:width,padding,color;transition-property:width,padding,color;-webkit-transition-duration:100ms;transition-duration:100ms;-webkit-transition-timing-function:ease-in;transition-timing-function:ease-in}
+            .board_widgets .icon_leftarrow:hover{color:#393939}
+            .board_widgets .icon_leftarrow:hover span{width:22px;padding-right:2px}
+            .textarea_border{ border:1px solid #ccc; padding: 5px; width:400px;}
+            .textarea{ position: relative; white-space: pre-wrap; word-wrap: break-word; }
+            .yj-tapf-container {background: #fff; border: 1px solid #ccc; cursor: text; margin: 0 -5px; padding: 6px 4px 4px 4px; width: 100%}
+            .t_div, .t_textarea {background: transparent; font: normal normal 12px/18px Helvetica, Arial, sans-serif; margin: 0; min-height: 36px; overflow: hidden; padding: 0; width: 100%;  position: absolute; left: 0; top: 0}
+            .t_textarea{ border:none; padding: 0; line-height: 18px; margin: 0; width: 100%; overflow: hidden; display: block; position: absolute; background: #fff; resize:none; }
+            .t_div{ line-height: 18px;opacity: 0; color: transparent; filter:alpha(opacity=0);}
+        </style>
+</head>
+<body>
+    <h1>side_bar_test</h1>
+<div class="board_wrapper disabled_all_widgets">
+    <a class="trigger icon_rightarrow">
+        <span><<</span>
+    </a>
+    <div class="board_widgets">
+        <a class="trigger icon_leftarrow">
+            <span>>></span>
+        </a>
+    </div>
+    <div class="list_wrap">
+        <ul class="content_list clearfix">
+            <li class="list">1</li>
+            <li class="list">2</li>
+            <li class="list">3</li>
+            <li class="list">4</li>
+            <li class="list">5</li>
+        </ul>
+    </div>
+    <p>ad</p>
+</div>
+    <script type="text/javascript">
+        var setLiWidth = function(){
+            var w_w = $('.list_wrap').width();
+            if(w_w<1340){
+                w_w = 1340;
+            }
+            $('.content_list').css('width',w_w);
+            $('.content_list li').css('width',(w_w-10*5)/5);
+        }
+        setLiWidth();
+        $('.icon_rightarrow').click(function(){
+            $('.board_wrapper').removeClass('disabled_all_widgets');
+            setLiWidth();
+        });
+        $('.icon_leftarrow').click(function(){
+            $('.board_wrapper').addClass('disabled_all_widgets');
+            setLiWidth();
+        });
+    </script>
+</body>
+</html>

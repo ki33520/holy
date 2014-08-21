@@ -1,0 +1,28 @@
+<head>
+<meta charset="utf-8">
+<title>test</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+</head>
+<script>
+//每周精选数据
+var submit = {};
+submit.type = 'all';
+submit.page = 1;
+$.post("services/data.php", submit, cBack);
+
+//每周之星数据
+var submit = {};
+submit.type = 'star';
+$.post("services/data.php", submit, cBack);
+
+
+$.get('services/thinkpage.php?city=上海', function(data) {
+//    console.log(data);
+});
+
+function cBack(data) {
+//  console.log(JSON.stringify(data));
+}
+
+
+</script>

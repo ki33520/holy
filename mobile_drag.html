@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>jQuery UI Touch Punch - Mobile Device Touch Event Support for jQuery UI</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <style>body { background:#fff; font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; }</style>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>
+  </head>
+  <body>
+
+    <div class="container">
+      
+
+      <style>
+        .ui-widget-content { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; background: #000; color: #fff;}
+        .ui-widget-header{ width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; color: #fff;  background: #f00;}
+        .blue{ background: blue;}
+        .black{ background: #000;}
+        </style>
+        <script>
+        $(function() {
+          var drop_bl = false;
+          $( ".ui-widget-content" ).draggable({
+            revert: function(){
+              if(drop_bl){
+                return false;
+              }else{
+                return true;
+              }
+            },
+            opacity: 0.7,
+            helper:'clone',
+            snap: ".ui-widget-header",
+
+         });
+          var oldClass= 'red';
+          $( "#droppable" ).droppable({
+            drop: function( event, ui ) {
+              drop_bl = true;
+              $( this ).removeClass(oldClass)
+                .addClass( "ui-state-highlight "+ui.helper.attr('data') )
+                .find( "p" )
+                  .html( ui.helper.attr('data'));
+              oldClass = ui.helper.attr('data');
+            }
+          });
+           // $( "#draggable" ).draggable({ revert: function(){
+           //    if($(this).offset().left>300){
+           //      return false;
+           //    }else{
+           //      return true;
+           //    }
+              
+           // } });
+        });
+        </script>
+
+
+
+      <div class="demo">
+        
+      <div id="draggable" class="ui-widget-content" data="black">
+        <p>Drag me to my target</p>
+      </div>
+      <div id="draggable2" class="ui-widget-content blue" data="blue">
+        <p>Drag me to my target</p>
+      </div>
+
+      <div id="droppable" class="ui-widget-header">
+        <p>Drop here</p>
+      </div>
+
+      </div><!-- End demo -->
+
+
+
+      <div class="demo-description" style="display: none; ">
+      <p>Enable any DOM element to be droppable, a target for draggable elements.</p>
+      </div><!-- End demo-description -->
+
+
+      
+    </div>
+    </body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+	<title>跨界无界</title>
+<!--Adobe Edge Runtime-->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <script type="text/javascript" charset="utf-8" src="index_edgePreload.js"></script>
+    <style>
+        .edgeLoad-EDGE-15405259 { visibility:hidden; }
+    </style>
+<!--Adobe Edge Runtime End-->
+<script type="text/javascript">
+//weixin
+  
+var imgUrl = 'http://www.in-media.cn/webeda/wj/images/logo.jpg';
+var lineLink = 'http://www.in-media.cn/webeda/wj/';
+var descContent = "强生数字营销案例交流研讨会";
+var shareTitle = '跨界无界';
+var appid = '';
+
+function shareFriend() {
+    WeixinJSBridge.invoke('sendAppMessage',{
+                            "appid": appid,
+                            "img_url": imgUrl,
+                            "img_width": "100",
+                            "img_height": "100",
+                            "link": lineLink,
+                            "desc": descContent,
+                            "title": shareTitle
+                            }, function(res) {
+                            _report('send_msg', res.err_msg);
+                            })
+}
+function shareTimeline() {
+    WeixinJSBridge.invoke('shareTimeline',{
+                            "img_url": imgUrl,
+                            "img_width": "100",
+                            "img_height": "100",
+                            "link": lineLink,
+                            "desc": descContent,
+                            "title": shareTitle
+                            }, function(res) {
+                            _report('timeline', res.err_msg);
+                            });
+}
+function shareWeibo() {
+    WeixinJSBridge.invoke('shareWeibo',{
+                            "content": descContent,
+                            "url": lineLink,
+                            }, function(res) {
+                            _report('weibo', res.err_msg);
+                            });
+}
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+
+        WeixinJSBridge.on('menu:share:appmessage', function(argv){
+            shareFriend();
+            });
+
+        WeixinJSBridge.on('menu:share:timeline', function(argv){
+            shareTimeline();
+            });
+
+        WeixinJSBridge.on('menu:share:weibo', function(argv){
+            shareWeibo();
+            });
+        }, false);
+
+</script>
+</head>
+<body style="margin:0;padding:0;height:100%;"><iframe height=100% allowTransparency="true" frameborder="0" scrolling="yes" style="width:100%;border:none"  src="http://10.88.0.158/holy/creatjs.html"></iframe>
+	<div id="Stage" class="EDGE-15405259">
+	</div>
+    
+    
+    <div style="display:none"><script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fcc753fda8304d42ab3f58e298f04c40d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</div>
+</body>
+</html>
